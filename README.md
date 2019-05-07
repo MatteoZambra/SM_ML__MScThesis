@@ -17,4 +17,4 @@ In the full swing of the example provided in [1], some synthetic data set are be
 
 2. [Andrew M. Saxe, James L. McClelland, Surya Ganguli, _A mathematical theory of semantic development in deep neural networks_, 2018](https://arxiv.org/abs/1810.10531 "arXiv")
 
-3. [Sebastian Musslick, Andrew M. Saxe, Kayhan Ozcimder, Biswadip Dey, Greg Henselman, Jonathan D. Cohen](https://www.researchgate.net/publication/317019423_Multitasking_Capability_Versus_Learning_Efficiency_in_Neural_Network_Architectures "Research Gate")
+3. [Sebastian Musslick, Andrew M. Saxe, Kayhan Ozcimder, Biswadip Dey, Greg Henselman, Jonathan D. Cohen , _Multitasking Capability Versus Learning Efficiency in Neural Network Architectures_, 2017](https://www.researchgate.net/publication/317019423_Multitasking_Capability_Versus_Learning_Efficiency_in_Neural_Network_Architectures "Research Gate")
