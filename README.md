@@ -9,6 +9,7 @@ Motivated by recent publications concerning the development and formalisation of
 
 In the full swing of the example provided in [2], some synthetic data set are being cratfed, according to some particular morphology (e.g. binary tree structure), then these are fed to a neural network. A simple feed forward network is accounted for as model zero.
 
+Subs
 
 
 ## References
