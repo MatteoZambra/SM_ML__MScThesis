@@ -11,6 +11,10 @@ In the full swing of the example provided in [2], some synthetic data set are be
 
 The main concern is the nucleation of some recurrent structures in the trained network (in the terms of [4], _network motifs_). The interest is to investigate the process of evolution of such motifs and their role (if any), and try to put this phenomenon in relationship with the learning process, that is: How the probabilistic signature of the data fed to the system is encoded in the internal structure of the network itself.
 
+## Contents
+
+Jupyter notebooks, a Docs folder in which an up-tp-date version of the progress report lays, alongside with the motif dictionary document, taken [here](https://www.weizmann.ac.il/mcb/UriAlon/download/network-motif-software).
+
 
 ## References
 
