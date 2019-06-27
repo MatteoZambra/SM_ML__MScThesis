@@ -212,6 +212,10 @@ Nc = max(vertsDF['Class'])
 #msk = (edgesDF['source'] == k+1) | (edgesDF['target'] == k+1)
 vertsDF['Topological'] = pd.Series(np.ones(vertsDF.shape[0]),
                                    index = vertsDF.index)
+vertsDF['listTO'] = pd.Series([[] for i in range(vertsDF.shape[0])], 
+                              index = vertsDF.index)
+#vertsDF['Value']       = pd.Series(np.zeros(vertsDF.shape[0]), 
+#                                   index = vertsDF.index) 
 #%%
 #
 #for node in verts1:
@@ -245,22 +249,113 @@ for k in range(Nc):
         #end        
     #end
     for node in verts_k:
-        
-        lefts = 0; rights = 0
+        print("\nnode: ",node)
+#        lefts = 0; rights = 0
+#        for edge in edges_k:
+#            
+#            if (edge[0] == node):
+#                lefts += 1
+#            elif (edge[1] == node):
+#                rights += 1
+#                vertsDF.at[node,'Topological'] = int(
+#                        vertsDF.at[edge[0],'Topological'] + 1)
+#                vertsDF.at[node,'listTO'].append(edge[0])
+#                for v in vertsDF.at[edge[0],'listTO']:
+#                    if v not in vertsDF.at[node,'listTO']:
+#                        vertsDF.at[node,'listTO'].append(v)
+#                    #end
+#                #end
+#            #end
+#        
+        tmp = []
         for edge in edges_k:
             
-            if (edge[0] == node):
-                lefts += 1
-            elif (edge[1] == node):
-                rights += 1
-                vertsDF.at[node,'Topological'] = int(
-                        vertsDF.at[edge[0],'Topological'] + 1)
-            #end
+            if (edge[1] == node):
+                tmp.append(edge[0])
+            #endif
+        #end
+        print(tmp)
+        vertsDF.at[node,'listTO'] = tmp
+            
+        for t in tmp:
+            print("t = ",t)
+            print(vertsDF.at[t,'listTO'])
+            for _t in vertsDF.at[t,'listTO']:
+                print("_t = ",_t)
+                if (_t not in vertsDF.at[node,'listTO']):
+                    vertsDF.at[node,'listTO'].append(_t)
+                #endif
+            #enddo
+        #enddo
         
+        topos = []
+        if (len(tmp) != 0):
+            for t in range(len(tmp)):
+                topos.append(vertsDF.at[tmp[t],'Topological'])
+            #enddo
+            vertsDF.at[node,'Topological'] = max(topos) + 1
+        #end
+    #enddo
+#    del tmp, topos, verts_k, edges_k
+#enddo
+    
+    
+#%%
+
+M = 100
+N = vertsDF.shape[0]    
+
+X = np.zeros((M,N))
+Y = np.zeros((M,Nc))
+
+
+for i in range(X.shape[0]):
+    print("pattern : ",i+1, "of ",M)
+    X[i,:] = -1
+
+    label = np.random.randint(1,Nc+1)
+    
+    vertsClass = vertsDF[vertsDF['Class'] == label].sort_values('Topological')
+
+    vertsClass['value'] = pd.Series(np.zeros(vertsClass.shape[0]), 
+                                index = vertsClass.index)
+
+    for v in vertsClass.index.tolist():
+        
+        if (len(vertsClass.at[v,'listTO']) == 0):
+            vertsClass.at[v,'value'] = 1
+            X[i,v-1] = 1
+        else:
+            vertsClass.at[v,'value'] = len(vertsClass.at[v,'listTO'])
+            X[i,v-1] = len(vertsClass.at[v,'listTO'])
+        #end
+    #end
+    
+    for j in range(Nc):
+        if (j == label-1):
+            Y[i,j] = 1
         #end
     #end
 #end
-    
+
+
+DataSet = [X,Y]
+
+
+#%%
+
+X_df = pd.DataFrame(X)
+covMat = X_df.cov()
+plt.matshow(covMat)
+plt.colorbar()
+plt.show()
+
+
+#%%
+#fileID = open(r'DataSets/Cluster_DS_list.pkl', 'wb')
+#pickle.dump(DataSet,fileID)
+#fileID.close()
+
 
 
 

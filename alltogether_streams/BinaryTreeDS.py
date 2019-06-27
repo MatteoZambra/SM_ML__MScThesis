@@ -163,7 +163,7 @@ class BinaryTreeDataSet:
         print(Y.shape," quindi il numero di classi diverse è {}".format(Y.shape[1]))
         
         DataSet = [X,Y]
-        fileID = open(r'DataSets_levels/DataSet_list_lev4.pkl', 'wb')
+        fileID = open(r'DataSets/TreeLev2_DS_list.pkl', 'wb')
         pickle.dump(DataSet, fileID)
         fileID.close()
         
@@ -172,6 +172,7 @@ class BinaryTreeDataSet:
 #        fileID = open(r'DataSets/DataSet_list_noise.pkl', 'wb')
 #        pickle.dump(DataSet, fileID)
 #        fileID.close()
+        return [X,Y]
 #endclass
 
 # ------------------ Deployment
@@ -179,10 +180,21 @@ class BinaryTreeDataSet:
 Bf = 2
 D = 5
 M = 2000
-lev = 4
+lev = 2
 flipFraction = 5.
 
 bt = BinaryTreeDataSet(Bf,D,M,lev)
-bt.DataSet_creator(flipFraction)
+[X,Y] = bt.DataSet_creator(flipFraction)
 
 
+#%%
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+fig = plt.figure(figsize = (10,10))
+X_df = pd.DataFrame(X)
+covMat = X_df.cov()
+plt.matshow(covMat)
+plt.colorbar()
+plt.show()

@@ -10,6 +10,12 @@ Adesso i pesi init sono stati creati, quindi non li tocchiamo più.
 Qui li carichiamo ed effettivamente trainiamo il modello. Poi magari non
 serve nemmeno esportare tutto il model daccapo, basterebbero solo i pesi
 
+
+REMARK: remember SCOOP1718 <3: this code breaks almost all the SE rules.
+To improve it, it could be a good idea to create a class: ModelTrain. Then 
+two classes which inherit what could be in common and differ in that a 
+first one performs singular goal training whilst the second performs mvg
+
 """
 
 import PlotFunctions as pfn
@@ -55,16 +61,18 @@ def model_train(model, X, Y, split_fraction, plots, mvg):
         
         
         if (plots == True):
-            plt.figure(figsize=(8,6))
+            plt.figure(figsize=(10,4))
+            plt.subplot(1,2,1)
             plt.plot(history.history['acc'])
             plt.plot(history.history['val_acc'])
             plt.title('Model accuracy')
             plt.ylabel('Accuracy')
             plt.xlabel('Epoch')
             plt.legend(['Train', 'Validation'], loc='lower right')
-            plt.show()
+#            plt.show()
             
-            plt.figure(figsize=(8,6))
+#            plt.figure(figsize=(6,4))
+            plt.subplot(1,2,2)
             plt.plot(history.history['loss'])
             plt.plot(history.history['val_loss'])
             plt.title('Model loss')
@@ -96,12 +104,12 @@ def model_train(model, X, Y, split_fraction, plots, mvg):
 
     else:
         
-        fileID = open(r'DataSets_levels/DataSet_list_lev2.pkl', 'rb')
+        fileID = open(r'DataSets/TreeLev2_DS_list.pkl', 'rb')
         
         DataSet_1 = pickle.load(fileID)
         fileID.close()
         
-        fileID = open(r'DataSets_levels/DataSet_list_lev4.pkl', 'rb')
+        fileID = open(r'DataSets/Clusters_DS_list.pkl', 'rb')
         
         DataSet_2 = pickle.load(fileID)
         fileID.close()

@@ -20,7 +20,7 @@ def plotter(params_vect, numLayers, plot_hist = True):
         
         for i in range(numLayers):
             
-            plt.figure(figsize=(18,6))
+            plt.figure(figsize=(10,6))
             
             # weights at params_vect[i], i = 0,2,4,..
             plt.subplot(1,2,1)
@@ -49,7 +49,7 @@ def plotter(params_vect, numLayers, plot_hist = True):
         
         for i in range(numLayers):
             
-            plt.figure(figsize=(18,6))
+            plt.figure(figsize=(10,6))
             plt.subplot(1,2,1)
             j = 2*i
             weights = params_vect[j].flatten()
@@ -85,7 +85,7 @@ def jointPlotter(numLayers, params_pre, params_post, plot_hist = True):
     
             j = 2*i
             # as before: weights on the even slots
-            plt.figure(figsize=(18,6))
+            plt.figure(figsize=(14,6))
             ax = plt.subplot(1,2,1)
             w1 = params_pre[j].flatten()
             w2 = params_post[j].flatten()
@@ -142,7 +142,7 @@ def jointPlotter(numLayers, params_pre, params_post, plot_hist = True):
         for i in range(numLayers):
     
             j = 2*i
-            plt.figure(figsize=(18,6))
+            plt.figure(figsize=(14,6))
             plt.subplot(1,2,1)
             w1 = params_pre[j].flatten()
             bandwidth = 1.06 * w1.std() * w1.size ** (-1 / 5.)

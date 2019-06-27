@@ -145,6 +145,7 @@ class plotNet():
 
     def plotNetFunction(self):
         
+        print("NetPlot function")
         network = NeuralNetwork(asGraph = self.asGraph)
         # weights to convert from 10 outputs to 4 (decimal digits to their binary representation)
 

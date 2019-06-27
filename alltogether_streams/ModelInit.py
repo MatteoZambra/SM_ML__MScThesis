@@ -17,12 +17,15 @@ from keras.initializers import RandomNormal, Orthogonal
 # note: RandomNormal(mean = 0.0, stddev = 0.05, seed = None)
 #       Orthogonal(gain = 1.0, seed = None)
 
-import pickle
+#import pickle
 
 
-def model_init(M):
+def model_init(X,Y):
     
-    print("Model initialise. Only first two layers")
+    print("Model initialise")
+    
+    M = X.shape[1]
+    Nc = Y.shape[1]
     
     model = Sequential()
     
@@ -39,7 +42,15 @@ def model_init(M):
                                                 seed = None),
                 activation = 'relu'))
                 
-    model.save("Model/model.h5")
+    model.add(Dense(units = Nc,
+                kernel_initializer = Orthogonal(gain = 1.0, seed = None),
+                bias_initializer = RandomNormal(mean = 0.0,
+                                                stddev = 0.1,
+                                                seed = None),
+                activation = 'softmax'))
+                
+#    model.save("Model/model.h5")
+    return model
 #enddef
     
 def model_lastLayer(model,nCat):
@@ -58,18 +69,18 @@ def model_lastLayer(model,nCat):
 
 # ============================================================================
 
-dataSet_clean = False
-
-if (dataSet_clean == True):
-    fileID = open(r'DataSets_levels/DataSet_list_lev2.pkl', 'rb')
-else:
-    fileID = open(r'DataSets_levels/DataSet_list_lev4.pkl', 'rb')
-#end
-
-DataSet = pickle.load(fileID)
-fileID.close()
-
-X = DataSet[0]
-M = X.shape[1]
+#dataSet_clean = False
+#
+#if (dataSet_clean == True):
+#    fileID = open(r'DataSets_levels/DataSet_list_lev2.pkl', 'rb')
+#else:
+#    fileID = open(r'DataSets_levels/DataSet_list_lev4.pkl', 'rb')
+##end
+#
+#DataSet = pickle.load(fileID)
+#fileID.close()
+#
+#X = DataSet[0]
+#M = X.shape[1]
 
 #model_init(M)
