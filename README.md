@@ -13,7 +13,7 @@ The main concern is the nucleation of some recurrent structures in the trained n
 
 ## Contents
 
-Jupyter notebooks, a Docs folder in which an up-tp-date version of the progress report lays, alongside with the motif dictionary document, taken [here](https://www.weizmann.ac.il/mcb/UriAlon/download/network-motif-software).
+Although Jupyter notebooks render visualisation ease and readability, it is better for the coding process to use Python sources. A Docs folder in which an up-tp-date version of the progress report lays, alongside with the motif dictionary document, taken [here](https://www.weizmann.ac.il/mcb/UriAlon/download/network-motif-software).
 
 
 ## References
