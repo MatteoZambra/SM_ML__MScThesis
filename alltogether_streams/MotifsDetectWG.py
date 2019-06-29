@@ -1,7 +1,7 @@
 
 """
 Tanto per cominciare dovrei andare a prendere il model trained. 
-E' model trained salvato su disco? NO. porcoddio!!
+E' model trained salvato su disco? NO. 
 """
 
 #import keras
