@@ -1,4 +1,4 @@
-# SM_ML__Thesis
+# StatisticalMechanics_MachineLearning__MScThesis
 
 ## Aim
 This repo contains the code intended to support the developing process of my Master Degree Thesis.
