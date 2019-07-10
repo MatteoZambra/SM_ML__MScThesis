@@ -9,10 +9,11 @@ Created on Mon Jun 10 08:56:55 2019
 #from keras.models import load_model
 
 import pickle
+from keras.models import load_model
 
 import NetworkPlot as npl
 import ModelTrain as mt
-import MotifsDetect as md
+#import MotifsDetect as md
 import ModelInit as mdm
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -38,10 +39,12 @@ def plotCovMat(X):
 
 
 
-plotCov = False
+plotCov = True
 plots = True
 plot_net = True
-dataSet_id = 2
+model_save = True
+modelInit = False
+dataSet_id = 1
 nodesSubgraph = 4
 
 
@@ -71,8 +74,11 @@ if plotCov == True:
 #layer2_lev2 = model_zero.get_weights()[2]
 #model = mdm.model_lastLayer(model_zero, Y.shape[1])
 
-model = mdm.model_init(X,Y)
-
+if (modelInit == True):
+    model = mdm.model_init(X,Y)
+else:
+    model = load_model("Model/model_init.h5")
+#end
 
 #%%
 weights_pre = model.get_weights()
@@ -82,7 +88,8 @@ if (plot_net == True):
     plotNet.plotNetFunction()
 #end
 
-params_post = mt.model_train(model, X,Y, 0.3, plots, mvg = True)
+params_post = mt.model_train(model, X,Y, 0.3, 
+                             plots, mvg = True)
 
 #%%
 if (plot_net == True):
@@ -90,7 +97,8 @@ if (plot_net == True):
     plotNet.plotNetFunction()
 #end
 
-md.motifDetector(params_post, nodesSubgraph, plotGraph = False, cutoff = 0.35)
+
+#md.motifDetector(weights_pre, nodesSubgraph, plotGraph = False, cutoff = 0.25)
 
 
 

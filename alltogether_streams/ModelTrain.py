@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun  7 17:27:27 2019
-
-@author: Matteo
-"""
 
 """
 Adesso i pesi init sono stati creati, quindi non li tocchiamo più. 
@@ -11,7 +5,7 @@ Qui li carichiamo ed effettivamente trainiamo il modello. Poi magari non
 serve nemmeno esportare tutto il model daccapo, basterebbero solo i pesi
 
 
-REMARK: remember SCOOP1718 <3: this code breaks almost all the SE rules.
+REMARK: remember SCOOP1718: this code breaks almost all the SE rules.
 To improve it, it could be a good idea to create a class: ModelTrain. Then 
 two classes which inherit what could be in common and differ in that a 
 first one performs singular goal training whilst the second performs mvg
@@ -99,6 +93,8 @@ def model_train(model, X, Y, split_fraction, plots, mvg):
             pfn.jointPlotter(numLayers, params_pre, params_post, plot_hist = True)
             pfn.jointPlotter(numLayers, params_pre, params_post, plot_hist = False)
         #end
+        
+        model.save("Model/model_trained_sg.h5")
             
         return params_post
 
@@ -169,7 +165,9 @@ def model_train(model, X, Y, split_fraction, plots, mvg):
             pfn.jointPlotter(numLayers, params_pre, params_post, plot_hist = True)
             pfn.jointPlotter(numLayers, params_pre, params_post, plot_hist = False)
         #end
-                
+        
+        model.save("Model/model_trained_mvg.h5")
+
         return params_post
 
     #endif

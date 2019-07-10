@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 """
-Created on Fri Jun  7 18:08:44 2019
-
-@author: Matteo
+Same as in the other, but this is finalised to be ready for MFINDER1.2
 """
 
 import numpy as np
 import subprocess
 #import os
 import NetworkPlot as npl
+from keras.models import load_model
 
 def motifDetector(weights, nodesSubgraph, plotGraph, cutoff):
 
@@ -67,7 +65,7 @@ def motifDetector(weights, nodesSubgraph, plotGraph, cutoff):
         plotNet = npl.plotNet(weights, asGraph = True)
         plotNet.plotNetFunction()
     #end
-        
+    
     AdjMat = []
     
     for k in range(numLayers):
@@ -110,19 +108,21 @@ def motifDetector(weights, nodesSubgraph, plotGraph, cutoff):
 #    
 #    strIn.append(strApp)
     print(strIn)
-    mfinderRep = subprocess.run(strIn, stdout = subprocess.PIPE).stdout.decode('utf-8')
+    mfinderRep = subprocess.run(strIn, 
+                                stdout = subprocess.PIPE).stdout.decode('utf-8')
     print(mfinderRep)
         
 #    os.system("inputGraph_OUT.txt")
     
 #end
     
-    
-    
-    
-    
-    
-    
-    
-    
+model = load_model("Model/model_trained_mvg.h5")
+weights = model.get_weights()
+
+motifDetector(weights, 4, plotGraph = False, cutoff = 0.32)
+
+
+
+
+
     

@@ -49,7 +49,7 @@ def model_init(X,Y):
                                                 seed = None),
                 activation = 'softmax'))
                 
-#    model.save("Model/model.h5")
+    model.save("Model/model_init.h5")
     return model
 #enddef
     

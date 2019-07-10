@@ -1,8 +1,46 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 18 09:41:31 2019
 
-@author: Matteo
+"""
+	INDEPENDENT CLUSTERS DATA SET
+	Leadweight ____ 
+	
+	graphDataStructure is a class that wraps some utilities
+	crafted _ad hoc_: the knowledge of the actual topological 
+	and architectural constraints imposed by the neural 
+	network _per se_ drastically simplifies most of the work
+	that one should perform in a sharply more Computer Science
+	fashion, graph algorithms and so forth.
+	
+	The idea is simple:
+		. generate a cloud of 31 points
+		. grouped in 4 clusters;
+		. link each point with any other;
+		. in a simulated annealing fashion,
+		  remove the edges between the verices
+		  that are more "dissimilar"
+		  Here dissimilarity may simply be the 
+		  distance between these. 
+		  Melting schedule is crucial.
+		. If the melting process was nealy 
+		  designed, one should end up with
+		  four independent and NOT fully 
+		  connected graphs.
+		. In a PGMs fashion, perform ancestral 
+		  sampling (See Chap.16 of the book "Deep
+		  Learning" by I.Goodfellow, Y.Bengio, 
+		  A.Courville, 2016) only for the class
+		  chosen. In this way, only the random variables
+		  of that class are different, and classification
+		  is almost straightforward
+		 
+	Once that done, labelling in done by means of onehots.
+	
+	NOTE: this script only deal with the GRAPH DATA SET, which 
+	has nothing to do with the graph that will subsequently come
+	from the neural network topology.
+	
+	The means and the matrix covariances of the (four) points 
+	clouds to generate are fixed a priori, and given to the method
+	which serves to generate such points.
 """
 
 import numpy as np
@@ -15,6 +53,13 @@ class graphDataStructure:
     
     def __init__(self, Nclasses):
         
+		"""
+		For consistency with the other data set, it is 
+		thought wiser to retain the input and output dimensions
+		That is: 31 vertices in the global graph,
+		         4  belongingness classes.
+		"""
+		
         self.verts = {}
         self.edges = []
         self.edgesStrengths = {}
@@ -79,6 +124,20 @@ class graphDataStructure:
     
     
     def VerticesGeneration(self, moments):
+	
+		"""
+		moments: list of lists with means 
+		and covariances 
+		A dictionary is thought neat for the ease
+		it yields to query for vertices.
+		Note that the values of the dict are:
+			. coordinates and
+			. class of belongingness.
+			
+		This latter is simply the index of the 
+		loop round, loop over the number of data
+		groups indeed.
+		"""
         
         verts = {}
         cnt = 0
@@ -96,7 +155,6 @@ class graphDataStructure:
         #end
         
         self.verts = verts
-        
         self.scatterPlot()
         return verts
     #end
@@ -110,9 +168,12 @@ class graphDataStructure:
         listVert = list(verts.keys())
 #        N = len(listVert)
         
+		# I know, nested loops are a bad idea
         for i in listVert:
             for j in listVert:
                 
+				# note that for the sake of indirectedness, one must account
+				# only the edges (i,j) with i > j in the loops progression
                 if (i != j and ((i,j) not in edges and (j,i) not in edges)):
                         
                     newEdge = (i,j)
@@ -123,6 +184,10 @@ class graphDataStructure:
                     
                     r = np.array([x_coord[0] - x_coord[1], 
                                   y_coord[0] - y_coord[1]])
+								  
+					
+					# strength = 1 / (norm of the distance btwn two verts)
+					
                     strength = 1./np.linalg.norm(r)
                     edgesStrengths.update({newEdge : strength})
                 #end
@@ -140,12 +205,15 @@ class graphDataStructure:
 #        edges = self.edges
 #        verts = self.verts
         
+		# melting schedule setup
         maxStrength = max(self.edgesStrengths.values())
         minStrength = min(self.edgesStrengths.values())
 
         temperatures = np.linspace(1/maxStrength, 1/minStrength, meltSched)
 
 
+		# heuristics could be improved
+		
         for T in temperatures:
     
             for edge in self.edges:
@@ -161,8 +229,29 @@ class graphDataStructure:
     #end
     
     def TopologicalOrdering(self):
+	
+		"""
+		Topological ordering is an integer denoting the 
+		position of a vertex in the directed graph which
+		represents the relationship btwn these RVs
+		"""
         
         print("Topological Ordering")
+		
+		# pandas DataFrames come particularly handy for the 
+		# query they render possible.
+		# the edges data frame contains 
+		#	. source : vertx from which edge starts
+		#	. target : vertx where this edge ends up
+		# vertices data frame features
+		#	. coordinates
+		#	. class
+		# Two columns are added to this latter: 
+		#	. topological : in which one shall write the
+		#					topological order, once found
+		#	. ancestry    : list of all the vertices from 
+		#					which edges start to indirectly
+		#					end up in that vertex
         
         edgesDF = pd.DataFrame(self.edges, columns = ['source', 'target'])
         vertsDF = pd.DataFrame.from_dict(self.verts,
@@ -176,6 +265,9 @@ class graphDataStructure:
         
         for k in range(Nc):
             
+			# for each class some local variables are thought clearer:
+			# for vertices and edges of that single class
+			
             verts_k = vertsDF[vertsDF['class'] == k+1]
             verts_k = verts_k.index.tolist()
             edges_k = []
@@ -183,6 +275,9 @@ class graphDataStructure:
             
             for node in verts_k:
                 
+				# collecting the edges which have as ends the nodes under
+				# consideration in the loop over nodes of each group
+				
                 msk = (edgesDF['source']==node) | (edgesDF['target']==node)
                 tmp = edgesDF[msk]
                 for i in range(tmp.shape[0]):
@@ -311,7 +406,7 @@ Y = DataSet[1]
 
 #fig = plt.figure(figsize = (10,10))
 #X_df = pd.DataFrame(X)
-#covMat = X_df.cov()
+#covMat = X_df.corr()
 #plt.matshow(covMat)
 #plt.colorbar()
 #plt.show()

@@ -1,19 +1,20 @@
 
 """
-Tanto per cominciare dovrei andare a prendere il model trained. 
-E' model trained salvato su disco? NO. 
+Retrieve models (init and trained) from disk.
+Then, all that lays is rows 18 -> end, is what there is
+objectively coded in the proGraphDataStructure.py script
 """
 
 #import keras
 from keras.models import load_model
 import numpy as np
 import pandas as pd
-
-from random import sample
+import spectrumSplit as ssp
 
 
 #%%
-model = load_model("Model/model_trained_sg.h5")
+model = load_model(r"C:\Users\Matteo\Desktop\MasterThesis\newThread\alltogether_streams\Model\model_init.h5")
+
 
 params = np.asarray(model.get_weights())
 numLayers = int(len(params)/2)
@@ -56,6 +57,7 @@ for i in range(1, numLayers):
 # edges and adjacency lists
     
 AdjMat = []
+Nodes = {}
 Edges = {}
 ne = 1
 
@@ -65,16 +67,22 @@ for k in range(sizeN):
     AdjMat.append(adj)
 #end
 
+for k in range(layers[1][-1]):
+    Nodes[k+1] = 0
+#end
+
 for k in range(numLayers):
     iRange = range(weights[k].shape[0])
     jRange = range(weights[k].shape[1])
+    offset = layers[k+1][-1]
     for i in iRange:
         for j in jRange:
             toAdd = layers[k+2][j]
             listElem = layers[k+1][i]
             AdjMat[listElem-1].append(toAdd)
             Edges.update({ne : [(listElem, toAdd), 
-                                weights[k][i,j]]})
+                                float(weights[k][i,j]) ]})
+            Nodes[offset+j+1] = float(biases[k][j])
             ne += 1
         #end
     #end
@@ -88,114 +96,47 @@ for adjs in AdjMat:
     idx += 1
 #end
 
-Edges= pd.DataFrame.from_dict(Edges, orient = "index",
-                              columns = ["edge", "strength"])
+EdgesDF = pd.DataFrame.from_dict(Edges, orient = "index",
+                               columns = ["edge", "param"])
 
-Nodes = {}
-for _,idx in enumerate(layers):
-    
-    [Nodes.update({layers[idx][i] : 0}) for i in range(len(layers[idx]))]
-#end
-    
-for _,k in enumerate(layers):
 
-    if (k <= numLayers):
-        nodLayer = layers[k].tolist()
-        for i in nodLayer:
-            Nodes[i] = len(AdjLists[i])
+NodesDF = pd.DataFrame.from_dict(Nodes, orient = "index",
+                               columns = ["param"])
+
+weights = np.asarray(EdgesDF["param"])
+biases = np.asarray(NodesDF["param"])
+
+counts,binsWeights = ssp.smartBins(weights, 
+                                   bwMethod = 'silverman',
+                                   factor = 0.5,
+                                   colors = 7)
+print(counts)
+EdgesDF = ssp.CategoriseWeightsBiases(EdgesDF,binsWeights)
+
+counts,binsBiases  = ssp.smartBins(biases, 
+                                   bwMethod = 'silverman',
+                                   factor = 0.33,
+                                   colors = 8)
+print(counts)
+NodesDF = ssp.CategoriseWeightsBiases(NodesDF,binsBiases)
+
+
+with open('inputColoredGraph.txt','w') as f:
+    for _,i in enumerate(AdjLists):
+        
+        for j in range(len(AdjLists[i])):
+            l = AdjLists[i][j]
+            aspe = EdgesDF.loc[EdgesDF["edge"] == (i,l)]
+            f.write("%s %s " % (i-1, l-1))
+            f.write("%s %s %s " % (int(NodesDF.loc[i,"cats"]),
+                                   int(NodesDF.loc[l,"cats"]),
+                                   int(aspe.at[aspe.index[0],"cats"])))
+            f.write("\n")
         #end
     #end
-#end
 #
 
-del AdjMat
-
-#%%
-
-
-
-def moveFrom(i, AdjLists, Edges, Nodes):
-    
-    weights = []
-    listRun = AdjLists[i] 
-    for j in listRun:
-        w = Edges.loc[Edges["edge"] == (i,j)].iloc[0]["strength"]
-        
-        p = np.random.uniform()
-        weights.append(w*p)
-    #end
-    
-    return listRun[weights.index(max(weights))]
-#end
-
-
-
-#%% Random walk
-    
-Edges["pass"] = pd.Series(np.zeros(Edges.shape[0]), 
-                          index = Edges.index)
-
-edgePassed = []
-
-for I in range(500):
-    
-    edgePassedWalk = []
-    
-    print("Walk ",I)
-    go = True
-    iPrev = int(sample(layers[1].tolist(),1)[0])
-    
-    while (go == True):
-        
-        iNext = moveFrom(iPrev, AdjLists, Edges, Nodes)
-        if (iNext in layers[4].tolist()):
-            go = False
-        #end
-        
-        edgePassedWalk.append( (iPrev, iNext) )
-        
-        idxList = Edges.index[Edges["edge"] == (iPrev,iNext)].tolist()
-        idx = idxList[0]
-        Edges.at[idx,"pass"] += 1
-        
-        iPrev = iNext
-    #end
-    edgePassed.append(edgePassedWalk)
-#end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+f.close()
 
 
 

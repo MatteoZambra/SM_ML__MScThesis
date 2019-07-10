@@ -1,6 +1,9 @@
-# -*- coding: utf-8 -*-
 """
-Binary data set generation
+	BINARY DATA SET GENERATION
+	
+	Binary tree data set generator object, which
+	
+		. is initialized with branching factor, levels
 """
 
 import numpy as np
@@ -9,6 +12,9 @@ from numpy import random
 from math import floor
 import pickle
 
+import pandas as pd
+import matplotlib.pyplot as plt
+
 
 class BinaryTreeDataSet:
 
@@ -16,11 +22,11 @@ class BinaryTreeDataSet:
 
         self.Bf = Bf
                               # Bf : branching factor
-                              # D : livelli dell'albero
-        self.N = Bf**(D) - 1  # tutti i nodi
-        self.n = Bf**(D-1) -1 # tutti i nodi NON foglie
-        self.P = Bf**(D-1)    # tutti i nodi foglie
-        self.M = M            # quanti pattern (data items)
+                              # D : levels. D = 1, ..., L+1
+        self.N = Bf**(D) - 1  # all the nodes
+        self.n = Bf**(D-1) -1 # all the nodes \ leaves
+        self.P = Bf**(D-1)    # all the leaves
+        self.M = M            # how many pattern (data items)
         
         self.lev = lev
 
@@ -33,6 +39,13 @@ class BinaryTreeDataSet:
     #end
 
     def patternGenerator(self):
+		"""
+		This method generates one only pattern, i.e. the collection
+		of all the nodes of the tree. Starting from root, whose value
+		is the outcome of a random variable x ~ U({-1, +1}), 
+		subsequent flips are performed probabilistically, according
+		to the threshold value e = .. fixed a priori
+		"""
 
         N = self.N
         n = self.n
@@ -41,7 +54,12 @@ class BinaryTreeDataSet:
         outcomes = [-1,1]
         e = 0.3
         tree[0] = outcomes[random.randint(0,2)]
-
+		
+		# only for the chilren of the root node it is
+		# used this convention. If the value sampled for
+		# the root node is +1, then the left child is 
+		# the one to inherit +1 and vice versa
+		
         if (tree[0] == 1):
             tree[1] = 1
             tree[2] = -1
@@ -49,6 +67,9 @@ class BinaryTreeDataSet:
             tree[1] = -1
             tree[2] = 1
         #end
+		
+		# from the children of the children of root
+		# the values are inherited flippingly
 
         for k in range(1,n):
             if (tree[k] == 1):
@@ -71,6 +92,11 @@ class BinaryTreeDataSet:
 
 
     def dataSetGenerator(self):
+	
+		"""
+		One single pattern is generated as many times as 
+		the user desires.
+		"""
 
         #print('in dataset generator')
         N = self.N; M = self.M
@@ -84,6 +110,16 @@ class BinaryTreeDataSet:
     #end
 
     def labelsGenerator(self, X, lev):
+	
+		"""
+		Primally, the labels matrix is set to be the identity. Then
+		the data set is explored to check whether two rows equal. If
+		them do, then the label of the second is set equal to the 
+		label of the former. Then zero columns are erased. This yields
+		a matrix whose rows are one-hot vectors, labelling each data row.
+		Most of the following code due to the wisdom of The Web 
+		--> https://stackoverflow.com/a/56295460/9136498
+		"""
 
         Y = np.eye(X.shape[0])
         print("DataSet: {} data entry having {} features each\n".format(X.shape[0], X.shape[1]))
@@ -132,6 +168,10 @@ class BinaryTreeDataSet:
     #enddef
 
     def dataSetNoiser(self, X, flipFraction = 5.):
+	
+		"""
+		turned out to be useless
+		"""
 
         MaxFlip = floor(X.shape[0]*X.shape[1]/flipFraction)
         X_ = X
@@ -153,6 +193,12 @@ class BinaryTreeDataSet:
     
     
     def DataSet_creator(self, flipFraction):
+	
+		"""
+		wrapper method that calls data and labels creation, so that
+		it is possible to perform a single call in main, and write 
+		DS on disk.
+		"""
         
 #        treeData = BinaryTreeDataSet(Bf,D,M)
         X = self.dataSetGenerator()
@@ -187,10 +233,6 @@ bt = BinaryTreeDataSet(Bf,D,M,lev)
 [X,Y] = bt.DataSet_creator(flipFraction)
 
 
-#%%
-
-import pandas as pd
-import matplotlib.pyplot as plt
 
 fig = plt.figure(figsize = (10,10))
 X_df = pd.DataFrame(X)
