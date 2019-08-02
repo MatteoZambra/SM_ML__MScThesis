@@ -13,6 +13,10 @@ A simple FFNN is inspected as breeding ground for _network motifs_ (in the terms
 
 ## Contents
 
+#### CODE UNDER MAINTENANCE.
+
+A more readable a organised architecture is being currently planned
+
 `Docs` folder contains an up to date report.
 
 `sources` contains the source codes used for the results. Here there are 
