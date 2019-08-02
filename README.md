@@ -44,7 +44,7 @@ A further improvement could be to gather all these functions in classes, accordi
 
 4. [Nadav Kashtan and Uri Alon, _Spontaneous evolution of modularity and network motifs_, 2005](https://www.pnas.org/content/102/39/13773 "PNAS")
 
-5. [Pedro Ribeiro and Fernando Silva, _Discovering Colored Network Motifs_Discovering Colored Network Motifs_, 2014](https://link.springer.com/chapter/10.1007/978-3-319-05401-8_11 "Springer")
+5. [Pedro Ribeiro and Fernando Silva, _Discovering Colored Network Motifs_, 2014](https://link.springer.com/chapter/10.1007/978-3-319-05401-8_11 "Springer")
 
 6. [Sarvenaz Choobdar, Pedro Ribeiro, and Fernando Silva, _Motif Mining in Weighted Networks_, 2012](https://ieeexplore.ieee.org/document/6406443/ "IEEE")
 
