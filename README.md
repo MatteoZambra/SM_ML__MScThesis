@@ -1,4 +1,4 @@
-# StatisticalMechanics_MachineLearning__MScThesis
+# Statistical Mechanics of Deep Learning. A Network Science Approach
 
 ## Aim
 This repo contains the code intended to support the developing process of my Master Degree Thesis.
@@ -17,7 +17,7 @@ A simple FFNN is inspected as breeding ground for _network motifs_ (in the terms
 
 A more readable a organised architecture is being currently planned
 
-`Docs` folder contains an up to date report.
+`Docs` folder contains a progess report in which some results are presented. **Note**: the report is not being updated anymore since the thesis written work is currently under construction.
 
 `sources` contains the source codes used for the results. Here there are 
 
