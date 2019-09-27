@@ -1,0 +1,81 @@
+FANMOD 1.1 subgraph enumeration
+-------------------------------
+
+Network name: C:\Users\matte\Desktop\MasterThesis\newThread\all_sources_new\Results\seed_618\glorot\tree\tree_u_Graph.txt
+Network type: Directed
+Number of nodes: 65
+Number of edges: 225
+Number of single edges: 225
+Number of mutual edges: 0
+
+Algorithm: enumeration
+Subgraph size: 4
+
+Generated 100 random networks
+   with locally constant number of bidirectional edges,
+   3 exchanges per edge and 3 tries per edge.
+
+15186 subgraphs were enumerated in the original network.
+1336533 subgraphs were enumerated in the random networks.
+1351719 subgraphs were enumerated in all networks.
+
+For the random networks: 97862 tries were made, 65467 were successful.
+Randomization took 0.068 seconds.
+Enumeration took 1.345 seconds.
+
+
+Result overview:
+
+ID,Adj-Matrix,Frequency,Mean-Freq,Standard-Dev,Z-Score,p-Value
+,,[Original],[Random],[Random]
+
+140,0000,24.272%,24.602%,0.0041918,-0.78673,0.78
+,0000
+,1000
+,1100
+
+392,0000,20.446%,19.836%,0.0049164,1.241,0.09
+,0001
+,1000
+,1000
+
+2116,0000,13.223%,9.9509%,0.0032107,10.19,0
+,1000
+,0100
+,0100
+
+74,0000,9.6931%,9.9386%,0.0038224,-0.64215,0.74
+,0000
+,0100
+,1010
+
+2184,0000,9.3836%,7.8479%,0.0019044,8.0643,0
+,1000
+,1000
+,1000
+
+536,0000,7.7571%,8.0147%,0.0044628,-0.57702,0.76
+,0010
+,0001
+,1000
+
+28,0000,5.7816%,3.9971%,0.0017278,10.328,0
+,0000
+,0001
+,1100
+
+2182,0000,3.602%,0.50507%,0.00076908,40.268,0
+,1000
+,1000
+,0110
+
+14,0000,3.411%,2.1945%,0.0013525,8.9948,0
+,0000
+,0000
+,1110
+
+204,0000,2.4299%,0.75741%,0.00079354,21.076,0
+,0000
+,1100
+,1100
+
