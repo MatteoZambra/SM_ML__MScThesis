@@ -34,15 +34,15 @@ def model_initialisation(N_input, N_classes, initialiser,
     
     if (initialiser == 'orth'):
         print("Orthogonal weights initialisation")
-        weights_initializer = Orthogonal(gain = 1.0, seed = None )#seed_value)
+        weights_initializer = Orthogonal(gain = 1.0, seed = seed_value)
     elif (initialiser == 'normal'):
         print("Normal weights initialisation")
         weights_initializer = RandomNormal(mean = 0.0,
                                           stddev = 0.1,
-                                          seed = None )#seed_value)
+                                          seed = seed_value)
     elif (initialiser == 'glorot'):
         print("Glorot weights initialisation")
-        weights_initializer = glorot_normal(seed = None )#seed_value)
+        weights_initializer = glorot_normal(seed = seed_value)
     elif (initialiser == 'zeros'):
         weights_initializer = Zeros()
     else:
