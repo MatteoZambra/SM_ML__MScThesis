@@ -4,7 +4,7 @@ Path to save images is a global variable
 
 """
 
-path_save_figs = r'C:\Users\matte\Desktop\MasterThesis\SKRITTURA\immagini\simul'
+path_save_figs = # *** absolute path where figures are wanted to be saved ***
 
 import proGraphDataStructure as pg
 import spectrumSplit as ssp

@@ -22,7 +22,7 @@ import seaborn as sns
 sns.set_style("ticks")
 
 
-path_save_figs = r'C:\Users\matte\Desktop\MasterThesis\SKRITTURA\immagini\simul'
+path_save_figs =  # *** absolute path where figures are wanted to be saved ***
 
 
 def model_initialisation(N_input, N_classes, initialiser, 

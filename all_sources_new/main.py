@@ -88,7 +88,7 @@ datasets = ['init','tree','clus']
 #datasets = ['tree']
 
 path_in_results = os.getcwd() + r'\Results'
-path_save_figs = r'C:\Users\matte\Desktop\MasterThesis\SKRITTURA\immagini\simul'
+path_save_figs =   # *** absolute path where figures are wanted to be saved ***
 streams.check_create_directory(path_save_figs)
 
 
@@ -303,7 +303,7 @@ for seed_value in seeds:
         all_motifs = pickle.load(fileID)
         fileID.close()
         
-        path_figs = r'C:\Users\matte\Desktop\MasterThesis\SKRITTURA\immagini\simul'
+        path_figs = # *** absolute path where figures are wanted to be saved ***
         streams.check_create_directory(path_figs + r'\summ_images')
         
         mp.significance_profiles(all_motifs,path_figs + r'\summ_images',

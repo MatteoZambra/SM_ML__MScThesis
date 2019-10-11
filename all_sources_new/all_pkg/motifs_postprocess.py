@@ -386,7 +386,6 @@ def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail, variation
     """
     for the laziest
     
-    B U G G Y
     It works, but for the ``variations'' case it requires some further refinements
     """
     if (variations):
@@ -403,7 +402,7 @@ def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail, variation
     #end
     
     
-    path_SKRITTURA = r'C:\Users\matte\Desktop\MasterThesis\SKRITTURA'
+    path_latex = # *** absolute path where figures are wanted to be saved ***
     if (weighted_graph == 'u'):
         rest = r'\_seed_{}_s{}_u_latex_source_{}.txt'.format(seed,
                    size, file_title_descr)
@@ -412,7 +411,7 @@ def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail, variation
                    size, file_title_descr, detail)
     #end
     
-    filename = path_SKRITTURA + rest
+    filename = path_latex + rest
     
     output_source = open(filename,'w')
     
