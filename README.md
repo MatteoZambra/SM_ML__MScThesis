@@ -7,7 +7,7 @@ This repo contains the code intended to support the developing process of my Mas
 
 Motivated by recent publications concerning the development and formalisation of a theoretical framework in which Deep Learning may fit into, this thesis topic and work is finalised to investigate the evolution of the topology of a neural system structure during the process of learning.
 
-Network Science is thought to be an interesting standpoint from which to look at the phenomenon from. Inspired by [Milo et al. (2002)](https://science.sciencemag.org/content/298/5594/824), a simple neural network is inspected as breeding ground for the emergence of network motifs, once the model is trained on different sets of synthetic data and with different initialisation schemes ([Saxe et al., 2013](https://arxiv.org/abs/1312.6120), [Glorot and Bengio, 2010](http://proceedings.mlr.press/v9/glorot10a.html)).
+Network Science is thought to be an interesting standpoint. Inspired by [Milo et al. (2002)](https://science.sciencemag.org/content/298/5594/824), a simple neural network is inspected as breeding ground for the emergence of network motifs, once the model is trained on different sets of synthetic data and with different initialisation schemes ([Saxe et al., 2013](https://arxiv.org/abs/1312.6120), [Glorot and Bengio, 2010](http://proceedings.mlr.press/v9/glorot10a.html)). It is hoped to appreciate the trace that the learning dynamics leaves in the form of functional modules.
 
 An endearing biological resemblance with **kinases** dynamics in transduction networks may be appreciated (see [Alon, 2006](https://www.crcpress.com/An-Introduction-to-Systems-Biology-Design-Principles-of-Biological-Circuits/Alon/p/book/9781439837177)).
  
