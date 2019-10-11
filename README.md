@@ -23,7 +23,7 @@ This hierarchy is automatically created by a program run, and files are saved in
 
 ## Motifs mining tool
 
-The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been used, in that it has the capability of inspecting colored netowrks, as it is the case. See the linked page for relevant papers, executable, sources and license.
+The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been used, in that it has the capability of inspecting colored networks, as it is the case. See the linked page for relevant papers, executable, sources and license.
 
 ## Manuscript
 
