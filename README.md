@@ -27,4 +27,4 @@ The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been use
 
 ## Manuscript
 
-Soon it will be uploaded the full manuscript of my thesis.
+Preprint in preparation.
