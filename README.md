@@ -21,6 +21,9 @@ An endearing biological resemblance with **kinases** dynamics in transduction ne
 
 This hierarchy is automatically created by a program run, and files are saved in a consistent fashion, in such a way to fetch the needed files in the same run or later. Note that in the `main.py` script the execution is modular: The user tells whether to repeat the preprocessing stage, training stage or whatever. Accordingly, files are created again or fetched.
 
+### Remark about some coding choices
+The OO-paradigm has been exploited but not aboused. For the purposes of many of the functions written, it has been realized that simple function definition were the best tradeoff between code readability, architecture clarity and modularity. The definition and usage of reduntant object types in this case would have resolved in an over-complex classes landscape, thus giving problems in an hypothetic further re-use.
+
 ## Motifs mining tool
 
 The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been used, in that it has the capability of inspecting colored networks, as it is the case. See the linked page for relevant papers, executable, sources and license.
