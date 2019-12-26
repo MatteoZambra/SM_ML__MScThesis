@@ -4,6 +4,8 @@
     Binary tree data set generator object, which
     
         . is initialized with branching factor, levels
+        . performs sampling of features vectors as explained
+          in the main text
 """
 
 import numpy as np
@@ -170,7 +172,7 @@ class BinaryTreeDataSet:
     def dataSetNoiser(self, X, flipFraction = 5.):
     
         """
-        turned out to be useless
+        D E P R E C A T E D
         """
 
         MaxFlip = floor(X.shape[0]*X.shape[1]/flipFraction)

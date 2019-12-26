@@ -1,12 +1,11 @@
 
 """
     INDEPENDENT CLUSTERS DATA SET
-    Leadweight ____ 
     
     graphDataStructure is a class that wraps some utilities
-    crafted _ad hoc_: the knowledge of the actual topological 
+    crafted `ad hoc': the knowledge of the actual topological 
     and architectural constraints imposed by the neural 
-    network _per se_ drastically simplifies most of the work
+    network `per se' drastically simplifies most of the work
     that one should perform in a sharply more Computer Science
     fashion, graph algorithms and so forth.
     
@@ -15,8 +14,8 @@
         . grouped in 4 clusters;
         . link each point with any other;
         . in a simulated annealing fashion,
-          remove the edges between the verices
-          that are more "dissimilar"
+          remove the edges between the vertices
+          that are more "dissimilar".
           Here dissimilarity may simply be the 
           distance between these. 
           Melting schedule is crucial.
@@ -63,7 +62,7 @@ class graphDataStructure:
         self.verts = {}
         self.edges = []
         self.edgesStrengths = {}
-#        self.vertsPerClass = np.random.randint(10,13, size = Nclasses)
+#        self.vertsPerClass = np.random.randint(10,13, size = Nclasses) # or,
         self.vertsPerClass = [8, 7, 9, 7]
     #end
     
@@ -80,8 +79,7 @@ class graphDataStructure:
             plt.scatter(vertsDf[vertsDf['class']==k+1]['x1'],
                         vertsDf[vertsDf['class']==k+1]['x2'],
                         s = 80)
-#           plt.xlabel(r"$x_{1}$", fontsize = 15)
-#           plt.ylabel(r"$x_{2}$", fontsize = 15)
+                        
             plt.xlabel("x1")
             plt.ylabel("x2")
             plt.title("Generated points scatterplot")
@@ -102,8 +100,7 @@ class graphDataStructure:
             plt.scatter(vertsDf[vertsDf['class']==k+1]['x1'],
                         vertsDf[vertsDf['class']==k+1]['x2'],
                         s = 80)
-#           plt.xlabel(r"$x_{1}$", fontsize = 15)
-#           plt.ylabel(r"$x_{2}$", fontsize = 15)
+                        
             plt.xlabel("x1")
             plt.ylabel("x2")
             plt.title("Generated points graph")
@@ -166,9 +163,7 @@ class graphDataStructure:
         verts = self.verts
         
         listVert = list(verts.keys())
-#        N = len(listVert)
         
-        # I know, nested loops are a bad idea
         for i in listVert:
             for j in listVert:
                 
@@ -187,7 +182,6 @@ class graphDataStructure:
                                   
                     
                     # strength = 1 / (norm of the distance btwn two verts)
-                    
                     strength = 1./np.linalg.norm(r)
                     edgesStrengths.update({newEdge : strength})
                 #end
@@ -200,10 +194,6 @@ class graphDataStructure:
     #end
     
     def SimulatedMelting(self,meltSched):
-        
-#        edgesStrengths = self.edgesStrenghts
-#        edges = self.edges
-#        verts = self.verts
         
         # melting schedule setup
         maxStrength = max(self.edgesStrengths.values())
