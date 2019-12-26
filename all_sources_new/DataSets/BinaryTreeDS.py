@@ -120,7 +120,7 @@ class BinaryTreeDataSet:
         label of the former. Then zero columns are erased. This yields
         a matrix whose rows are one-hot vectors, labelling each data row.
         Most of the following code due to the wisdom of The Web 
-        --> https://stackoverflow.com/a/56295460/9136498
+        > https://stackoverflow.com/a/56295460/9136498
         """
 
         Y = np.eye(X.shape[0])
@@ -135,7 +135,8 @@ class BinaryTreeDataSet:
         # Get 1D view
         # lowerBound = Bf**lev - 1
         uppBound = self.Bf**(lev + 1) - 2
-
+        print('upper bound = ', uppBound)
+        
         X_ = X[:,  : uppBound+1 ]
         a1D = view1D(X_)
 
@@ -179,7 +180,7 @@ class BinaryTreeDataSet:
         X_ = X
 
         if (MaxFlip < 5):
-            print("non flippi niente eh")
+            print("no flip")
         #end
 
         for k in range(MaxFlip):
@@ -208,12 +209,12 @@ class BinaryTreeDataSet:
         print("\n",type(X),"\n",X)
         print("\n",type(Y),"\n",Y)
         
-        print(Y.shape," quindi il numero di classi diverse è {}".format(Y.shape[1]))
+        print(Y.shape," : number of classes is {}".format(Y.shape[1]))
         
-        DataSet = [X,Y]
-        fileID = open(r'TreeLev2_DS_list.pkl', 'wb')
-        pickle.dump(DataSet, fileID)
-        fileID.close()
+        # DataSet = [X,Y]
+        # fileID = open(r'TreeLev2_DS_list.pkl', 'wb')
+        # pickle.dump(DataSet, fileID)
+        # fileID.close()
         
 #        X = self.dataSetNoiser(X, flipFraction)
 #        DataSet = [X,Y]
