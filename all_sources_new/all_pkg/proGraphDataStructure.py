@@ -6,7 +6,7 @@
       
   model is exported from keras.models
   
-      g= proGraph(model)
+      g = proGraph(model)
       
   g contains
   

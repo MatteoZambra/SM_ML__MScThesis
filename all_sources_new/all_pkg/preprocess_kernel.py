@@ -1,10 +1,11 @@
 
 """
 Path to save images is a global variable
-
 """
 
-path_save_figs = # *** absolute path where figures are wanted to be saved ***
+path_save_figs =  r'../figures'
+streams.check_create_directory(path_save_figs)
+
 
 import proGraphDataStructure as pg
 import spectrumSplit as ssp
@@ -33,6 +34,16 @@ def bins_for_scheme(path_in_dir, datasets, init_scheme):
     
     The bins of the histogram thus obtained are returned and subsequently used 
     for categorisation, see the ``specturmSplit'' module
+    
+    Input:
+        ~ path_in_dir           string, points to the directory in which the .h5 model 
+                                is saved
+        ~ datasets              list of strings, identifying the data set
+        ~ init_scheme           string, identifies the initialisation scheme
+    
+    Returns
+        ~ bins_edges            list of floats, which identify the position of the 
+                                subdivisions
     """
     
     is_dict = {'orth' : 'Orthogonal',
@@ -117,6 +128,8 @@ def bins_for_scheme(path_in_dir, datasets, init_scheme):
 
 #end
 
+
+
 def spectrum_discretize(path_in_dir, dataset_id, plot,
                         weighted_graph, write_file,
                         init_scheme, bins_edges):
@@ -124,6 +137,26 @@ def spectrum_discretize(path_in_dir, dataset_id, plot,
     """
     This is the core of the procedure: the keras model is turned to
     a graph, via the ``proGraphDataStructure'' module functionalities.
+    
+    Input:
+        ~ path_in_dir               same as above
+        ~ dataset_id                string, as above
+        ~ plot                      dict, contains bools to instruct the program flow
+                                    about whether display graphics or not
+        ~ weighted_graph            char, instructs the program flow whether the
+                                    graph is treated as weighted or not
+        ~ write_file                char, instructs the program flow whether to 
+                                    write the graph structure to file or not
+        ~ init_scheme               as above
+        ~ bins_edges                list of floats, where to place the subdivisions
+                                    among categories
+                                    
+    Returns:
+        ~ EdgesDF                   pandas.DataFrame, contains the edges meta-informations
+                                    that is the nodes the edge links, the category associated
+                                    to each edge, the connection strength. The category
+                                    information is used to classify edges among strongly positive
+                                    or negative, mildly positive or negative, negligible.
     """
     
     print("\nWeights specturm discretisation of " + dataset_id + " domain")

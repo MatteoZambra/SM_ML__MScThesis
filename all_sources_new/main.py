@@ -188,7 +188,7 @@ for seed_value in seeds:
         if (again['postprocess']):
             """
             Postprocess
-            Note that the function ``launcher_weighted_analysis'' is used for both
+            Note that the function ``analysis_launcher'' is used for both
             weighted and unweighted analysis. In the latter case, there is only one
             instance for topological group, then regardless of the ``detail'' flag,
             that only instance is selected.
@@ -212,10 +212,10 @@ for seed_value in seeds:
             #end
             
             motifs, variations, most_changed =  \
-                        mp.launcher_weighted_analysis(path_init, path_def, 
-                                                      path_figs, datasets,
-                                                      offset, weighted_graph, 
-                                                      size, plot, detail)
+                        mp.analysis_launcher(path_init, path_def, 
+                                             path_figs, datasets,
+                                             offset, weighted_graph, 
+                                             size, plot, detail)
             
             all_variations.update({init_scheme : variations})
             most_changed_motifs_initscheme.update({init_scheme : most_changed})

@@ -8,6 +8,19 @@ import pandas as pd
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 def plotCovMat(X,path):
+
+    """
+    Plot the covariance of the data set. This latter
+    is stored in the X matrix
+    
+    Input:
+        ~ X             numpy.ndarray, design matrix
+        ~ path          string, where to put the saved figure
+        
+    Returns:
+        nothing
+    """
+    
     X_df = pd.DataFrame(X)
     covMat = X_df.cov()
     plt.figure(figsize=(4,6))
@@ -22,6 +35,23 @@ def plotCovMat(X,path):
 
 
 def jointPlotter(numLayers, path, params_pre, params_post, plot_hist):
+
+    """
+    Plot the estimated densities of the model parameters, in particular weights
+    If the used desires, also histograms may be displayed. 
+    Personally, I feel like simple histograms for weights distributions
+    could have been enough but KDEs are more visually explanatory
+    
+    Input:
+        ~ numLayers             integer, number of layers
+        ~ path                  string, where to save the figures
+        ~ params_pre            list of numpy.ndarray, parameters of the initialised model
+        ~ params_post           same but for parameters of trained model
+        ~ plot_hist             bool, specifies whether to plot the histograms
+    
+    Returns:
+        nothing
+    """
     
     params_pre = np.asarray(params_pre)
     params_post = np.asarray(params_post)
@@ -31,7 +61,7 @@ def jointPlotter(numLayers, path, params_pre, params_post, plot_hist):
         for i in range(numLayers):
     
             j = 2*i
-            # as before: weights on the even slots
+            # weights on the even slots
             plt.figure(figsize=(15,6))
             ax = plt.subplot(1,2,1)
             w1 = params_pre[j].flatten()

@@ -1,4 +1,22 @@
 
+
+"""
+Motif simply intended as a group of interconnected units in a network,
+needs to be computationally defined with a dedicated data type. 
+The FANMOD program returns a comprehensive array of motifs features, including
+the adjacency matrix, the identifier, the frequency, the z-score and so on.
+
+Other than that, when it comes to deling with colored networks, the heterogeneity 
+of the connections strengths --translated by the preprocessing utilities to categories-- 
+is thought to be well encoded by the entropy intended as information theoretic, as 
+done by Choodbar et al. (2012) ``Motif mining in weighted networks''
+https://www.dcc.fc.up.pt/~pribeiro/pubs/pdf/choobdar-damnet2012.pdf
+
+This metric is not being used in the analyses. It could however be useful in
+further inspections
+"""
+
+
 import numpy as np
 #import os
 import csv
@@ -62,6 +80,23 @@ def motifs_load(path_file,offset,size):
 
     """
     Read the output file of the FANMOD motifs mining tool
+    
+    Input:
+        ~ path_file         string, where the FANMOD output motifs log file is stored
+        ~ offset            integer. Depending on whether the output refers to a weighted
+                            or unweighted analysis, the format of the log file changes 
+                            of those two rows. Specifying this detail allows to use the
+                            function regardless.
+                            Offset = 0 :: unweighted analysis log file
+                            Offset = 2 :: (skip two rows) weighted analysis log file
+        ~ size              integer. The size of the motifs accounted for. 
+                            In out analyses, only 4-nodes and 6-nodes motifs are inspected
+    
+    Returns:
+        ~ motifs            dictionary in which the keys are the identifiers of the topological
+                            isomorphic groups and the associated values are lists of instances of
+                            such a topological group. Each of these instances is a motifsreader.MotifObj
+                            instance, those defined above
     """
     
     header = []

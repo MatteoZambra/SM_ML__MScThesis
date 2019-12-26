@@ -2,6 +2,10 @@
 """
 Taken from https://stackoverflow.com/a/33720100/9136498
 slight modification done
+
+Minimal documentation, I only used this code _as it is_, for
+the purpose of plotting the network with connection strengths 
+made visually clear.
 """
 
 from matplotlib import pyplot
@@ -160,7 +164,6 @@ class plotNet():
 
         for i in range(self.numLayers-1):
             wghs = self.wghts[i]
-#            print(wghs.shape)
             network.add_layer((wghs.T).shape[1], wghs.T)
         #enddo
         network.add_layer((self.wghts[-1].T).shape[1], self.wghts[-1].T)

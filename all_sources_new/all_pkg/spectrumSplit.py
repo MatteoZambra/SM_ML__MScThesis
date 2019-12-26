@@ -11,10 +11,6 @@ weight and bias (of the neural system) a belonging category, in that
 motif mining software can deal with "colors". 
 
 
-*******************
-D E P R E C A T E D
-*******************
-
 Instead of KDE for each model, the whole weights population is 
 gathered in one array and a gaussian fit is made on that values.
 See the ``preprocess_kernel'' module
@@ -182,6 +178,15 @@ def spectrum_split_plot(weights, path_save_pic, dataset_id,
     Histogram plot.
     The number of categories is set before (binsEdges), and accordingly the 
     bars assume a different color
+    
+    Input:
+        ~ weights               numpy.array that contains the weights values (all the population)
+        ~ path_save_pic         string, path to save the figures
+        ~ dataset_id            string, identifies the data set
+        ~ bins_edges            list of floats, see above
+        
+    Returns:
+        nothing
     """
     
     ds_dict = {'init' : 'Initial',
@@ -227,7 +232,7 @@ def spectrum_split_plot(weights, path_save_pic, dataset_id,
 #end
 
         
-def CategoriseWeightsBiases(df, binsEdges):
+def CategoriseWeightsBiases(df, bins_edges):
 
     """
     categories are numerical values, integers.
@@ -235,6 +240,14 @@ def CategoriseWeightsBiases(df, binsEdges):
     to their value.
     The number of categories is the length of the 
     binsEdges array, namely, the 5 slices of the spectrum
+    
+    Input:
+        ~ df            pandas.DataFrame of the edges, see above
+        ~ bins_edges    list of floats, see above
+        
+    Returns:
+        ~ df            pandas.DataFrame of edges, in which the categories
+                        are set
     """
 
     df["cats"] = pd.Series(np.zeros(df.shape[0]),
@@ -243,9 +256,9 @@ def CategoriseWeightsBiases(df, binsEdges):
     for i in range(df.shape[0]):
         param = df.iloc[i]["param"]
         
-        for cate in range(1, len(binsEdges)):
+        for cate in range(1, len(bins_edges)):
             
-            if (param >= binsEdges[cate-1] and param < binsEdges[cate]):
+            if (param >= bins_edges[cate-1] and param < bins_edges[cate]):
                 
                 df.at[i+1,"cats"] = cate
             #end

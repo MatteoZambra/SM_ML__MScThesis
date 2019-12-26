@@ -13,19 +13,36 @@ import os
 
 
 def check_create_directory(path_name):
+
+    """
+    If the ``path_name'' directory exists, then nothing happens
+    Otherwise ``path_name'' is created
+    
+    Input:
+        ~ path_name         string, directory to create, if not present
+        
+    Returns:
+        nothing
+    """
+    
     if (not os.path.exists(path_name)):
-#        print('Folder {} not there'.format(path_name))
         os.system('mkdir ' + path_name)
-#        print('Folder {} created'.format(path_name))
     else:
         """
         directory already present
         """
-#        print('Folder {} present'.format(path_name))
     #end
 #end
     
 def init_directories(seeds):
+
+    """
+    *** D E P R E C A T E D ***
+    
+    Directory are rather initialised in the seeds and inits loops
+    in the main script
+    """
+    
     for seed in seeds:
         directory = '\_seeds\seed_'+str(seed)
         path_to_model = os.getcwd() + r'\Model' + directory
