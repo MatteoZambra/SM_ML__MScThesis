@@ -21,6 +21,9 @@ An endearing biological resemblance with **kinases** dynamics in transduction ne
 
 This hierarchy is automatically created by a program run, and files are saved in a consistent fashion, in such a way to fetch the needed files in the same run or later. Note that in the `main.py` script the execution is modular: The user tells whether to repeat the preprocessing stage, training stage or whatever. Accordingly, files are created again or fetched.
 
+#### Note
+In some modules it is necessary to provide a path pointing to a directory where images are desired to be stored. This means that the user must specify this path by hand. The directories related to any data set or initialization scheme will be automatically created, if the program flow requires it.
+
 ### Remark about some coding choices
 The OO-paradigm has been exploited but not aboused. For the purposes of many of the functions written, it has been realized that simple function definition were the best tradeoff between code readability, architecture clarity and modularity. The definition and usage of reduntant object types in this case would have resolved in an over-complex classes landscape, thus giving problems in an hypothetic further re-use.
 
