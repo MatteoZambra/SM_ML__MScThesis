@@ -119,7 +119,7 @@ class BinaryTreeDataSet:
         them do, then the label of the second is set equal to the 
         label of the former. Then zero columns are erased. This yields
         a matrix whose rows are one-hot vectors, labelling each data row.
-        Most of the following code due to the wisdom of The Web 
+        Most of the following code is taken from
         > https://stackoverflow.com/a/56295460/9136498
         """
 
@@ -229,7 +229,7 @@ class BinaryTreeDataSet:
 Bf = 2
 D = 5
 M = 2000
-lev = 2
+lev = 1
 flipFraction = 5.
 
 bt = BinaryTreeDataSet(Bf,D,M,lev)
