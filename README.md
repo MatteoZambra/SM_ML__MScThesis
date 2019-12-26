@@ -1,7 +1,7 @@
-# Statistical Mechanics of Deep Learning. A Network Science Approach
+# Emergence of Network Motifs in Deep Neural Networks
 
 ## Purpose
-This repo contains the code intended to support the developing process of my Master Degree Thesis.
+This repo contains the code intended to support the developing process of my Master Degree Thesis. The same results are used in the article _Emergence of network motifs in deep neural networks_, linked at the end of this Readme.
 
 ## Summary
 
@@ -30,4 +30,4 @@ The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been use
 
 ## Manuscript
 
-Preprint in preparation.
+Preparation for submission
