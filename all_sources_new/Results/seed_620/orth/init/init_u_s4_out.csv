@@ -1,0 +1,81 @@
+FANMOD 1.1 subgraph enumeration
+-------------------------------
+
+Network name: C:\Users\matte\Desktop\MasterThesis\gitpush\SM_ML__MScThesis\all_sources_new\Results\seed_620\orth\init\init_u_Graph.txt
+Network type: Directed
+Number of nodes: 65
+Number of edges: 268
+Number of single edges: 268
+Number of mutual edges: 0
+
+Algorithm: enumeration
+Subgraph size: 4
+
+Generated 100 random networks
+   with locally constant number of bidirectional edges,
+   3 exchanges per edge and 3 tries per edge.
+
+21357 subgraphs were enumerated in the original network.
+1925455 subgraphs were enumerated in the random networks.
+1946812 subgraphs were enumerated in all networks.
+
+For the random networks: 116270 tries were made, 78120 were successful.
+Randomization took 0.072 seconds.
+Enumeration took 1.308 seconds.
+
+
+Result overview:
+
+ID,Adj-Matrix,Frequency,Mean-Freq,Standard-Dev,Z-Score,p-Value
+,,[Original],[Random],[Random]
+
+140,0000,27.64%,26.121%,0.0036265,4.1869,0
+,0000
+,1000
+,1100
+
+392,0000,17.287%,19.451%,0.0040468,-5.348,1
+,0001
+,1000
+,1000
+
+2116,0000,14.024%,10.238%,0.0030649,12.35,0
+,1000
+,0100
+,0100
+
+2184,0000,10.006%,8.3159%,0.0013661,12.372,0
+,1000
+,1000
+,1000
+
+74,0000,9.9874%,9.754%,0.002623,0.88983,0.17
+,0000
+,0100
+,1010
+
+536,0000,7.1218%,7.2034%,0.0034831,-0.23434,0.59
+,0010
+,0001
+,1000
+
+28,0000,5.2442%,3.5135%,0.0019247,8.9921,0
+,0000
+,0001
+,1100
+
+2182,0000,3.1371%,0.49699%,0.00055486,47.583,0
+,1000
+,1000
+,0110
+
+14,0000,3.0482%,1.9318%,0.00090227,12.373,0
+,0000
+,0000
+,1110
+
+204,0000,2.505%,0.90037%,0.00064707,24.799,0
+,0000
+,1100
+,1100
+

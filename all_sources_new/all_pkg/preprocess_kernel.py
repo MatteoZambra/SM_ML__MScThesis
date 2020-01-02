@@ -3,9 +3,6 @@
 Path to save images is a global variable
 """
 
-path_save_figs =  r'../figures'
-streams.check_create_directory(path_save_figs)
-
 
 import proGraphDataStructure as pg
 import spectrumSplit as ssp
@@ -21,7 +18,11 @@ from matplotlib.patches import Patch
 from scipy.stats import norm
 
 
-def bins_for_scheme(path_in_dir, datasets, init_scheme):
+path_save_figs =  r'../figures'
+streams.check_create_directory(path_save_figs)
+
+
+def bins_for_scheme(path_in_dir, path_save_figs, datasets, init_scheme, exclusion_threshold):
 
     """
     All the weights from initial configuration to all trained configurations are
@@ -74,7 +75,7 @@ def bins_for_scheme(path_in_dir, datasets, init_scheme):
     fitted_curve = norm.pdf(weights_array, mu, sigma)
     ax.plot(weights_array, fitted_curve, 'k', lw = 2, alpha = 0.3)
     
-    threshold = 0.55 * max(fitted_curve)
+    threshold = exclusion_threshold * max(fitted_curve)
     bins_prev = []
     
     for i in range(1, weights_array.size):
@@ -130,7 +131,8 @@ def bins_for_scheme(path_in_dir, datasets, init_scheme):
 
 
 
-def spectrum_discretize(path_in_dir, dataset_id, plot,
+def spectrum_discretize(path_in_dir, path_save_figs,
+                        dataset_id, plot,
                         weighted_graph, write_file,
                         init_scheme, bins_edges):
                         
@@ -163,7 +165,6 @@ def spectrum_discretize(path_in_dir, dataset_id, plot,
     
     model = load_model(path_in_dir + r'\{}\model_{}.h5'.format(dataset_id,
                        dataset_id))
-    streams.check_create_directory(path_in_dir + r'\images')
     path_save_pic = path_save_figs + r'\{}\{}'.format(init_scheme,dataset_id)
     
     graph = pg.proGraph(model)

@@ -1,0 +1,81 @@
+FANMOD 1.1 subgraph enumeration
+-------------------------------
+
+Network name: C:\Users\matte\Desktop\MasterThesis\gitpush\SM_ML__MScThesis\all_sources_new\Results\seed_620\glorot\clus\clus_u_Graph.txt
+Network type: Directed
+Number of nodes: 65
+Number of edges: 302
+Number of single edges: 302
+Number of mutual edges: 0
+
+Algorithm: enumeration
+Subgraph size: 4
+
+Generated 100 random networks
+   with locally constant number of bidirectional edges,
+   3 exchanges per edge and 3 tries per edge.
+
+33709 subgraphs were enumerated in the original network.
+2898122 subgraphs were enumerated in the random networks.
+2931831 subgraphs were enumerated in all networks.
+
+For the random networks: 145397 tries were made, 84290 were successful.
+Randomization took 0.053 seconds.
+Enumeration took 2.031 seconds.
+
+
+Result overview:
+
+ID,Adj-Matrix,Frequency,Mean-Freq,Standard-Dev,Z-Score,p-Value
+,,[Original],[Random],[Random]
+
+140,0000,30.547%,28.668%,0.0034939,5.3777,0
+,0000
+,1000
+,1100
+
+2116,0000,13.795%,8.986%,0.0028628,16.797,0
+,1000
+,0100
+,0100
+
+392,0000,12.839%,15.533%,0.0046273,-5.8216,1
+,0001
+,1000
+,1000
+
+2184,0000,11.914%,9.641%,0.0016535,13.745,0
+,1000
+,1000
+,1000
+
+74,0000,10.668%,8.8568%,0.0032111,5.6399,0
+,0000
+,0100
+,1010
+
+28,0000,4.5893%,2.7427%,0.0016525,11.175,0
+,0000
+,0001
+,1100
+
+14,0000,4.5596%,2.7695%,0.0010854,16.493,0
+,0000
+,0000
+,1110
+
+204,0000,3.9574%,1.5627%,0.0009196,26.04,0
+,0000
+,1100
+,1100
+
+536,0000,3.8239%,4.8633%,0.0026816,-3.8762,1
+,0010
+,0001
+,1000
+
+2182,0000,3.3077%,0.50902%,0.00066376,42.165,0
+,1000
+,1000
+,0110
+

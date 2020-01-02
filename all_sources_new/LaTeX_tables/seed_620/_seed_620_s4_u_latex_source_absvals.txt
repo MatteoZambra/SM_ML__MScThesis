@@ -1,0 +1,70 @@
+\begin{table}
+\begin{center}
+	\begin{tabular}{ c | c | c | c }
+		\hline
+		\hline
+		Initial & Tree & Clusters & 		\hline
+		\multicolumn{4}{c}{Orthogonal} \\ 
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 47.583 Initial
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 24.799 Initial
+		%end of dataset Initial
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 63.616 Tree
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 35.59 Tree
+		%end of dataset Tree
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 52.912 Clusters
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 28.965 Clusters
+		%end of dataset Clusters
+		{\scriptsize $Z = 47.583$} ~ 
+		{\scriptsize $Z = 24.799$} & 
+		%end of dataset Initial
+		{\scriptsize $Z = 63.616$} ~ 
+		{\scriptsize $Z = 35.59$} & 
+		%end of dataset Tree
+		{\scriptsize $Z = 52.912$} ~ 
+		{\scriptsize $Z = 28.965$} & 
+		%end of dataset Clusters
+		\hline
+		\multicolumn{4}{c}{Normal} \\ 
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 11.754 Initial
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 9.9358 Initial
+		%end of dataset Initial
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 68.745 Tree
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 32.5 Tree
+		%end of dataset Tree
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 32.42 Clusters
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 18.65 Clusters
+		%end of dataset Clusters
+		{\scriptsize $Z = 11.754$} ~ 
+		{\scriptsize $Z = 9.9358$} & 
+		%end of dataset Initial
+		{\scriptsize $Z = 68.745$} ~ 
+		{\scriptsize $Z = 32.5$} & 
+		%end of dataset Tree
+		{\scriptsize $Z = 32.42$} ~ 
+		{\scriptsize $Z = 18.65$} & 
+		%end of dataset Clusters
+		\hline
+		\multicolumn{4}{c}{Glorot} \\ 
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 43.838 Initial
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 27.119 Initial
+		%end of dataset Initial
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 54.397 Tree
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 33.961 Tree
+		%end of dataset Tree
+		\includegraphics[scale=0.1]{immagini/simul/motifs/2182} ~	% 42.165 Clusters
+		\includegraphics[scale=0.1]{immagini/simul/motifs/204} &	% 26.04 Clusters
+		%end of dataset Clusters
+		{\scriptsize $Z = 43.838$} ~ 
+		{\scriptsize $Z = 27.119$} & 
+		%end of dataset Initial
+		{\scriptsize $Z = 54.397$} ~ 
+		{\scriptsize $Z = 33.961$} & 
+		%end of dataset Tree
+		{\scriptsize $Z = 42.165$} ~ 
+		{\scriptsize $Z = 26.04$} & 
+		%end of dataset Clusters
+	\end{tabular}
+\end{center}
+\caption{}
+\label{tab:}
+\end{table}

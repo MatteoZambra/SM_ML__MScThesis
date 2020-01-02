@@ -54,9 +54,9 @@ To define which code blocks activate, whether to produce plots
 """
 
 
-plot = {'training'      : False,
+plot = {'training'      : True,
         'distributions' : False,
-        'network'       : False,
+        'network'       : True,
         'preprocess'    : True,
         'motifs'        : True}
 
@@ -64,21 +64,22 @@ again = {'initialise'   : False,
          'train'        : False,
          'train_plots'  : False,
          'preprocess'   : False,
-         'postprocess'  : False,
-         'tex_source'   : False,
+         'postprocess'  : True,
+         'tex_source'   : True,
          'summ_plots'   : True,
          'efficacy'     : False}
 
 split_fraction = 0.3
 
-weighted_graph = 'w'
-write_file = 'n'
+weighted_graph = 'u'
+write_file = 'y'
 size = 4    # size = [4,6]
 detail = 'mtm'
+exclusion_threshold = 0.65
 
 
 #seeds = [3,5,6]
-seeds = [618]
+seeds = [620]
 
 
 initialisations = ['orth','normal','glorot'] # U ['zeros'] ?
@@ -88,9 +89,6 @@ datasets = ['init','tree','clus']
 #datasets = ['tree']
 
 path_in_results = os.getcwd() + r'\Results'
-path_save_figs =   # *** absolute path where figures are wanted to be saved ***
-streams.check_create_directory(path_save_figs)
-
 
 """
 The idea is to loop over:
@@ -115,6 +113,13 @@ for seed_value in seeds:
     random.seed(seed_value)
     np.random.seed(seed_value)
     tf.set_random_seed(seed_value)
+    
+    path_save_figs = os.getcwd() + r'\Figures\seed_{}'.format(seed_value)
+    streams.check_create_directory(path_save_figs)
+    path_summary_plots = path_save_figs + r'\Summary_plots'
+    streams.check_create_directory(path_summary_plots)
+    path_latex_export = os.getcwd() + r'\LaTeX_tables\seed_{}'.format(seed_value)
+    streams.check_create_directory(path_latex_export)
     
     directory = '\seed_'+str(seed_value)
     path_in_seeds = path_in_results + directory
@@ -154,11 +159,13 @@ for seed_value in seeds:
             
             for dataset_id in datasets[1:]:
                 if (dataset_id == 'mvg'):
-                    ko.model_train_multitask(path_def, dataset_id,
+                    ko.model_train_multitask(path_def, path_save_figs,
+                                             dataset_id,
                                              split_fraction, plot,
                                              init_scheme)
                 else:
-                    ko.model_training(path_def, dataset_id,
+                    ko.model_training(path_def, path_save_figs,
+                                      dataset_id,
                                       split_fraction, plot, init_scheme)
                 #end
             #end
@@ -176,13 +183,15 @@ for seed_value in seeds:
         """
         
         if (again['preprocess']):
-            bins_edges = prek.bins_for_scheme(path_def,datasets,init_scheme)
-            edges_dfs = [prek.spectrum_discretize(path_def, dataset_id, plot,
+            bins_edges = prek.bins_for_scheme(path_def, path_save_figs,
+                                              datasets, init_scheme, exclusion_threshold)
+            edges_dfs = [prek.spectrum_discretize(path_def, path_save_figs,
+                                      dataset_id, plot,
                                       weighted_graph, write_file, 
                                       init_scheme, bins_edges)  \
                                            for dataset_id in datasets]
         #end
-            
+        
         #end
         
         if (again['postprocess']):
@@ -278,9 +287,9 @@ for seed_value in seeds:
         print("Producing LaTeX code")
         
         mp.LaTeX_source_export(most_changed_dfs,weighted_graph,size,seed_value,
-                               detail, variations = True)
+                               detail, path_latex_export, variations = True)
         mp.LaTeX_source_export(all_motifs,weighted_graph,size,seed_value,
-                               detail, variations = False)
+                               detail, path_latex_export, variations = False)
     #end
     
     if (again['summ_plots']):
@@ -303,14 +312,11 @@ for seed_value in seeds:
         all_motifs = pickle.load(fileID)
         fileID.close()
         
-        path_figs = # *** absolute path where figures are wanted to be saved ***
-        streams.check_create_directory(path_figs + r'\summ_images')
-        
-        mp.significance_profiles(all_motifs,path_figs + r'\summ_images',
+        mp.significance_profiles(all_motifs,path_summary_plots,
                                  initialisations,datasets,weighted_graph,size,
                                  plot, detail,
                                  by = 'initialisation')
-        mp.significance_profiles(all_motifs,path_figs + r'\summ_images',
+        mp.significance_profiles(all_motifs,path_summary_plots,
                                  initialisations,datasets,weighted_graph,size,
                                  plot, detail,
                                  by = 'dataset')

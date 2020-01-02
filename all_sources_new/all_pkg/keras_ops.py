@@ -146,6 +146,7 @@ def load_data(path_data):
 
 
 def model_training(path_save_model,
+                   path_save_figs,
                    dataset_id, 
                    split_fraction,
                    plot, init_scheme):
@@ -182,7 +183,6 @@ def model_training(path_save_model,
     model = load_model(path_save_model + r'\init\model_init.h5')
     params_pre = model.get_weights()
     
-    streams.check_create_directory(path_save_model + r'\images')
     path_save_pic = path_save_figs + r'\{}\{}_'.format(init_scheme,dataset_id)
     if (plot['network']):
         plotNet = npl.plotNet(params_pre, path_save_pic, 
@@ -237,28 +237,29 @@ def model_training(path_save_model,
         model.evaluate(Xtest,Ytest, verbose = 2))
     
     
-   if (plot['distributions']):
+    if (plot['distributions']):
        numLayers = len(model.layers)
        pfn.jointPlotter(numLayers, path_save_pic, params_pre,
                         params_post, plot_hist = False)
-   #end
-   if (plot['network']):
+    #end
+    if (plot['network']):
        plotNet = npl.plotNet(params_post, path_save_pic, 
                              trained = True, asGraph = False)
        plotNet.plotNetFunction()
-   #end
+    #end
     
-   streams.check_create_directory(path_save_model + r'\{}'.format(dataset_id))
-   model.save(path_save_model + r'\\' + dataset_id +  \
+    streams.check_create_directory(path_save_model + r'\{}'.format(dataset_id))
+    model.save(path_save_model + r'\\' + dataset_id +  \
               r'\\model_' + dataset_id + ".h5")
-   model.save(path_save_model + r'\{}\model_{}.h5'.format(dataset_id,
+    model.save(path_save_model + r'\{}\model_{}.h5'.format(dataset_id,
               dataset_id))
     
-   return model, history.history['acc']
+    return model, history.history['acc']
 #end
 
 
 def model_train_multitask(path_save_model,
+                          path_save_figs,
                           dataset_id,
                           split_fraction,
                           plot, init_scheme):
@@ -304,7 +305,6 @@ def model_train_multitask(path_save_model,
     params = model.get_weights()
     params_pre = params
     
-    streams.check_create_directory(path_save_model + r'\images')
     path_save_pic = path_save_figs + r'\{}\{}_'.format(init_scheme,dataset_id)
     if (plot):
         plotNet = npl.plotNet(params_pre, path_save_pic, 
@@ -338,20 +338,20 @@ def model_train_multitask(path_save_model,
         params = params_post
     #end
     
-   if (plot['training']):
+    if (plot['training']):
        
        numLayers = len(model.layers)
        pfn.jointPlotter(numLayers, path_save_pic, params_pre,
                         params_post, plot_hist = False)
-   #end
-   if (plot['network']):
+    #end
+    if (plot['network']):
        plotNet = npl.plotNet(params_post, path_save_pic, 
                              trained = True, asGraph = False)
        plotNet.plotNetFunction()
-   #end
+    #end
    
-   streams.check_create_directory(path_save_model + r'\{}'.format(dataset_id))
-   model.save(path_save_model + r'\{}\model_{}.h5'.format(dataset_id,
+    streams.check_create_directory(path_save_model + r'\{}'.format(dataset_id))
+    model.save(path_save_model + r'\{}\model_{}.h5'.format(dataset_id,
               dataset_id))
     
     

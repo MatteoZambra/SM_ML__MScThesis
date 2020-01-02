@@ -472,7 +472,12 @@ def variations_comparison(variations, path_images,
     cmap = cm.get_cmap('Spectral', 10)
     plt.imshow(variations.corr(), cmap=cmap)
     labels = variations.columns.tolist()
-    labels = ['',labels[0],'',labels[1],'',labels[2],'']
+    
+    """
+    With no MVG case, use the second
+    """
+#    labels = ['',labels[0],'',labels[1],'',labels[2],'']
+    labels = ['',labels[0],'',labels[1],'']
     span = np.arange(3)
     ax.xticks = span
     ax.yticks = span
@@ -492,7 +497,7 @@ def variations_comparison(variations, path_images,
 
 #end
     
-def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail, variations):
+def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail,path_latex_export, variations):
     """
     for the laziest.
     Is could be useful to plot tables in which one shows the motifs in a tabular form,
@@ -520,8 +525,7 @@ def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail, variation
         file_title_descr = 'absvals'
     #end
     
-    
-    path_latex = # *** absolute path where figures are wanted to be saved ***
+
     if (weighted_graph == 'u'):
         rest = r'\_seed_{}_s{}_u_latex_source_{}.txt'.format(seed,
                    size, file_title_descr)
@@ -530,7 +534,7 @@ def LaTeX_source_export(motifs_df, weighted_graph, size, seed, detail, variation
                    size, file_title_descr, detail)
     #end
     
-    filename = path_latex + rest
+    filename = path_latex_export + rest
     
     output_source = open(filename,'w')
     

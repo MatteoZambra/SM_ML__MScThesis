@@ -111,10 +111,11 @@ class NeuralNetwork():
         layer = Layer(self, number_of_neurons, weights)
         self.layers.append(layer)
 
-    def draw(self):
+    def draw(self, path):
         for layer in self.layers:
             layer.draw(self.asGraph)
         pyplot.axis('scaled')
+        pyplot.savefig(path, dpi=300, bbox_inches = "tight")
         pyplot.show()
 
 
@@ -174,6 +175,6 @@ class plotNet():
         else:
             self.path += r'net_untrained.png'
 
-        network.draw()
-        pyplot.savefig(self.path, dpi=300, bbox_inches = "tight")
-        pyplot.show()
+        network.draw(self.path)
+#        pyplot.savefig(self.path, dpi=300, bbox_inches = "tight")
+#        pyplot.show()
