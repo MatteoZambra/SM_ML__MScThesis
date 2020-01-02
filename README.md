@@ -32,5 +32,6 @@ The OO-paradigm has been exploited but not aboused. For the purposes of many of 
 The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been used, in that it has the capability of inspecting colored networks, as it is the case. See the linked page for relevant papers, executable, sources and license.
 
 ## Manuscript
+[arXiv preprint](https://arxiv.org/abs/1912.12244) available.
 
-Preparation for submission
+Under review in [Entropy](https://www.mdpi.com/journal/entropy)
