@@ -37,7 +37,7 @@ Note that the directory where this input file is stored is `..\srcs\Results\seed
 
 
 ### Remark about some coding choices
-The OO-paradigm has been exploited but not aboused. For the purposes of many of the functions written, it has been realized that simple function definition were the best tradeoff between code readability, architecture clarity and modularity. The definition and usage of reduntant object types in this case would have resolved in an over-complex classes landscape, thus giving problems in an hypothetic further re-use.
+The OO-paradigm has been exploited but not abused. For the purposes of many of the functions written, it has been realized that simple function definition were the best trade-off between code readability, architecture clarity and modularity. The definition and usage of reduntant object types in this case would have resolved in an over-complex classes landscape, thus giving problems in an hypothetic further re-use.
 
 ### Remarks about the MNIST data set case
 It would be interesting to do a comparison with real-world data sets related results. The code has been modified to implement in a painless way the training on thte MNIST data set. However, the major difficulty is the fact that the networks used for the artificial data sets are inevitably different from the net that would absorb the MNIST data samples and classify them, due to the different input and output dimensions.
