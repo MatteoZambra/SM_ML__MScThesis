@@ -30,7 +30,7 @@ In the `main.py` file, two dictonaries are declared at the beginning of the work
 
 The `again` dictionary, on the other hand, instruct the program to whether perform the respective analysis stage, in a similar fashion. This means that if the `training` item is set to `False`, then the program run omits to train the model again. Such a choice is likely to be done once the model has been trained yet, the graph data structure has been prepared for the FANMOD program (see below) and this latter has been used to mine motifs in the trained network. At this point is not necessary to perform training and preprocess, then the user tells the program to skip these stages and go stright to the post-process stage, where the FANMOD output files are fetched and their content is used to visualize the motifs informations.
 
-#### FANMOD usage in the analyses
+### FANMOD usage in the analyses
 
 The FANMOD software has the advantages to implement wighted (colored) network motifs mining and has a graphical user interface. It is not possible to call it from command line, hence to integrate it in the workflow of the code contained in this repository. The user must tune the workflow instructions in the aforementioned dictionaries in such a way to create the graph files amenable for FANMOD in a first run, run FANMOD so that this latter can generate the needed output files and in a second time the code should be run again, executing the postprocess stage.
 
@@ -38,8 +38,6 @@ In the analyses presented FANMOD has been used setting the number of random netw
 
 Note that the directory where this input file is stored is `..\all_sources_new\Results\seed_n\init_scheme`. Here there are the `.h5` Keras model export, the FANMOD input file and the output file generated running this latter. In the postprocessing stage, the program is thought to fetch these output files from this directory.
 
-#### Note
-In some modules it is necessary to provide a path pointing to a directory where images are desired to be stored. This means that the user must specify this path by hand. The directories related to any data set or initialization scheme will be automatically created, if the program flow requires it.
 
 ### Remark about some coding choices
 The OO-paradigm has been exploited but not aboused. For the purposes of many of the functions written, it has been realized that simple function definition were the best tradeoff between code readability, architecture clarity and modularity. The definition and usage of reduntant object types in this case would have resolved in an over-complex classes landscape, thus giving problems in an hypothetic further re-use.
