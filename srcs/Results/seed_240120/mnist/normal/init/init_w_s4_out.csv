@@ -1,0 +1,63 @@
+FANMOD 1.1 subgraph enumeration
+-------------------------------
+
+Network name: C:\Users\matte\_nmnn\srcs\Results\seed_240120\mnist\normal\init\init_w_Graph.txt
+Network type: Directed
+Number of nodes: 817
+Number of edges: 296
+Number of single edges: 296
+Number of mutual edges: 0
+Number of edge colors: 2
+
+Algorithm: enumeration
+Subgraph size: 4
+
+Generated 100 random networks
+   with locally constant number of bidirectional edges,
+   exchanging only edges with the same color,
+   3 exchanges per edge and 3 tries per edge.
+
+11281 subgraphs were enumerated in the original network.
+1185763 subgraphs were enumerated in the random networks.
+1197044 subgraphs were enumerated in all networks.
+
+For the random networks: 97997 tries were made, 89595 were successful.
+Randomization took 0.105 seconds.
+Enumeration took 2.876 seconds.
+
+
+Result overview:
+
+ID,Adj-Matrix,Frequency,Mean-Freq,Standard-Dev,Z-Score,p-Value
+,,[Original],[Random],[Random]
+
+2184,0000,82.369%,78.267%,0.0055548,7.3833,0
+,2000
+,2000
+,2000
+
+140,0000,14.192%,12.877%,0.0031427,4.1847,0
+,0000
+,2000
+,2200
+
+2116,0000,3.2001%,2.9394%,0.00097928,2.6619,0
+,0002
+,0002
+,2000
+
+74,0000,0.14183%,0.14244%,0.00032435,-0.018682,0.51
+,0000
+,0200
+,2020
+
+14,0000,0.070916%,0.064597%,5.979e-005,1.0568,0
+,0000
+,0000
+,2220
+
+204,0000,0.026593%,0.058738%,0.00022295,-1.4418,0.95
+,0000
+,2200
+,2200
+

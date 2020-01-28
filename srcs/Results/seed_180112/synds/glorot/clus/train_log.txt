@@ -1,0 +1,2 @@
+Training log
+Test loss and accuracy : 0.000505 ; 1.000000 

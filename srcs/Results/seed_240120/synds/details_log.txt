@@ -1,0 +1,6 @@
+Cut-off: 0.55
+Network architecture:
+Input layer: 31 units, activation: relu
+Hidden layer: 20 units, activation: relu
+Hidden layer: 10 units, activation: relu
+Output layer: 4 units, activation: softmax

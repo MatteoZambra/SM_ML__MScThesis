@@ -1,0 +1,117 @@
+FANMOD 1.1 subgraph enumeration
+-------------------------------
+
+Network name: C:\Users\matte\_nmnn\srcs\Results\seed_240120\mnist\normal\init\init_w_Graph.txt
+Network type: Directed
+Number of nodes: 817
+Number of edges: 296
+Number of single edges: 296
+Number of mutual edges: 0
+Number of edge colors: 2
+
+Algorithm: enumeration
+Subgraph size: 5
+
+Generated 100 random networks
+   with locally constant number of bidirectional edges,
+   exchanging only edges with the same color,
+   3 exchanges per edge and 3 tries per edge.
+
+54640 subgraphs were enumerated in the original network.
+6302639 subgraphs were enumerated in the random networks.
+6357279 subgraphs were enumerated in all networks.
+
+For the random networks: 98100 tries were made, 89614 were successful.
+Randomization took 0.103 seconds.
+Enumeration took 49.89 seconds.
+
+
+Result overview:
+
+ID,Adj-Matrix,Frequency,Mean-Freq,Standard-Dev,Z-Score,p-Value
+,,[Original],[Random],[Random]
+
+541200,00000,54.652%,47.307%,0.013804,5.3208,0
+,20000
+,20000
+,20000
+,20000
+
+8728,00000,20.509%,16.519%,0.0075,5.32,0
+,00000
+,20000
+,02000
+,22000
+
+8472,00000,19.68%,16.069%,0.0061344,5.8865,0
+,00000
+,20000
+,20000
+,22000
+
+532744,00000,3.1021%,2.5452%,0.0014527,3.8338,0
+,00002
+,00002
+,00002
+,20000
+
+540,00000,0.57101%,0.47979%,0.00050057,1.8222,0
+,00000
+,00000
+,20000
+,22200
+
+404,00000,0.48682%,0.4094%,0.00029487,2.6257,0.01
+,00000
+,00000
+,02200
+,20200
+
+8340,00000,0.43192%,0.39527%,0.00089085,0.41141,0.35
+,00000
+,02000
+,00200
+,20200
+
+8724,00000,0.39165%,0.36592%,0.00082287,0.31275,0.38
+,00000
+,02000
+,20000
+,20200
+
+17176,00000,0.15739%,0.3084%,0.00099677,-1.515,0.93
+,00000
+,20000
+,22000
+,22000
+
+154,00000,0.0054905%,0.0053575%,3.7308e-005,0.03565,0.44
+,00000
+,00000
+,00200
+,22020
+
+796,00000,0.0036603%,0.0088697%,4.2839e-005,-1.216,0.86
+,00000
+,00000
+,22000
+,22200
+
+16646,00000,0.0036603%,0.0016207%,1.5371e-005,1.3269,0.04
+,00000
+,02000
+,20000
+,00220
+
+16780,00000,0.0036603%,0.0040111%,2.6754e-005,-0.13113,0.42
+,00000
+,20000
+,02200
+,02200
+
+30,00000,0.0018302%,0.0013925%,5.1854e-006,0.84399,0
+,00000
+,00000
+,00000
+,22220
+
