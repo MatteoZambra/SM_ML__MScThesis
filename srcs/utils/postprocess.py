@@ -266,11 +266,9 @@ def scatter_plot(motifs_init, motifs_post, dataset, **flow):
     plt.title(title)
     if (flow['plot']['post_scatter']):
         if (flow['weighted_graph'] == 'u'):
-            title = flow['path_figures'] + r'\{}_motifsScatter_s{}_u.png'.format(dataset, 
-                                    str(flow['motifs_size']))
+            title = flow['path_figures'] + r'\scatter_s{}_u.png'.format(str(flow['motifs_size']))
         elif (flow['weighted_graph'] == 'w'):
-            title = flow['path_figures'] + r'\{}_motifsScatter_s{}_w_{}.png'.format(dataset, 
-                                    str(flow['motifs_size']), flow['detail'])
+            title = flow['path_figures'] + r'\scatter_s{}_w_{}.png'.format(str(flow['motifs_size']), flow['detail'])
         #end
         plt.savefig(title, dpi = 300, bbox_inches = 'tight')
     #end
@@ -348,9 +346,9 @@ def variations_distributions(motifs_init, motifs_post, dataset, **flow):
     plt.title(title)
     if (flow['plot']['post_distr']):
         if (flow['weighted_graph'] == 'u'):
-            title = flow['path_figures'] + r'\{}_motifsAbsVar_s{}_u.png'.format(dataset, str(flow['motifs_size']))
+            title = flow['path_figures'] + r'\{}_varhist_s{}_u.png'.format(dataset, str(flow['motifs_size']))
         elif (flow['weighted_graph'] == 'w'):
-            title = flow['path_figures'] + r'\{}_motifsAbsVar_s{}_w_{}.png'.format(dataset, 
+            title = flow['path_figures'] + r'\{}_varhist_s{}_w_{}.png'.format(dataset, 
                                      str(flow['motifs_size']), flow['detail'])
         #end
         plt.savefig(title, dpi=300, bbox_inches = "tight")
@@ -426,9 +424,9 @@ def variations_comparison(most_changed_motifs, **flow):
     plt.title(title)
     if (flow['plot']['post_bars']):
         if (flow['weighted_graph'] == 'u'):
-            title = flow['path_figures'] + r'\all_s{}_u_totZscVar.png'.format(str(flow['motifs_size']))
+            title = flow['path_figures'] + r'\zvar_s{}_u.png'.format(str(flow['motifs_size']))
         elif (flow['weighted_graph'] == 'w'):
-            title = flow['path_figures'] + r'\all_s{}_w_totZscVar_{}.png'.format(flow['motifs_size'], flow['detail'])
+            title = flow['path_figures'] + r'\zvar_s{}_w_{}.png'.format(flow['motifs_size'], flow['detail'])
         #end
         plt.savefig(title, dpi=300, bbox_inches = "tight")
     #end
@@ -557,10 +555,10 @@ def significance_profiles(all_motifs, datasets, initializations, **flow):
             
             if (item_inner == inner_loop[-1]):
                 if (flow['weighted_graph'] == 'u'):
-                    title = flow['path_splots'] + r'\s{}_u_summplotby_{}_{}.png'.format(str(flow['motifs_size']),
+                    title = flow['path_splots'] + r'\s{}_u_sp_{}_{}.png'.format(str(flow['motifs_size']),
                             flow['sp_by'], item_outer)
                 elif (flow['weighted_graph'] == 'w'):
-                    title = flow['path_splots'] + r'\s{}_w_summplotby_{}_{}_{}.png'.format(str(flow['motifs_size']),
+                    title = flow['path_splots'] + r'\s{}_w_sp_{}_{}_{}.png'.format(str(flow['motifs_size']),
                             flow['sp_by'], item_outer, flow['detail'])
                 #end
                 plt.savefig(title, dpi = 300, bbox_inches = 'tight')

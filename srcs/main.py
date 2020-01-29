@@ -24,30 +24,36 @@ import train
 import preprocess
 import postprocess
 
-seed_value = 250120
+seed_value = 450509
 random.seed(seed_value)
 np.random.seed(seed_value)
 tf.set_random_seed(seed_value)
 
 
-flow   = {'mnist'             : False,
+flow   = {'mnist'             : True,
           'initialize'        : False,
           'train'             : False,
           'network'           : {240120 : [20,10],
                                  250120 : [20,20],
-                                 180112 : [30,30]},
-          'preprocess'        : False,
+                                 180112 : [30,30],
+                                 450509 : [50,50,20]},
+          'preprocess'        : True,
           'postprocess'       : False,
           'serialize'         : False,
           'efficacy'          : False,
           'sp_by'             : ' ',
           'seed'              : seed_value,
-          'write_graph'       : True,
+          'write_graph'       : False,
           'weighted_graph'    : 'w',
           'motifs_size'       : 5,
           'detail'            : 'msm',
           'save_model'        : True,
-          'plot'              : {'weights_kdes'  : False,
+          'plot'              : {'train'         : False,
+                                 'weights_kdes'  : True,
+                                 'preprocess'    : False,
+                                 'post_scatter'  : True,
+                                 'post_distr'    : True,
+                                 'post_bars'     : True,
                                  'post_summary'  : False} }
 
 
@@ -56,6 +62,7 @@ variations_all_motifs = {}
 significances_all_motifs = {}
 
 initializations = ['normal','orth','glorot']
+# initializations = ['glorot']
 
 if flow['mnist']: 
     datasets = ['init','mnist']
@@ -106,6 +113,7 @@ for init_scheme in initializations:
         binsedges = preprocess.bins_for_scheme(datasets, init_scheme, **flow)
         edges_dfs = [preprocess.spectrum_discretize(binsedges, dataset,
                                                     init_scheme, **flow) for dataset in datasets]
+        preprocess.t_test(edges_dfs, datasets, init_scheme, **flow)
     #end
     
     
@@ -197,7 +205,7 @@ with open(path_results + r'\details_log.txt', 'w') as f:
     #end
     f.write('Output layer: 4 units, activation: softmax')
 #end
-
+f.close()
 
 plt.close('all')
 

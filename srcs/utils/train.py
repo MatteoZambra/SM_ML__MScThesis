@@ -4,11 +4,13 @@
 import graphds
 import streams
 
+import os
 import pickle
 import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
+from scipy.stats import ttest_ind
 
 import keras
 from keras.datasets import mnist
@@ -27,6 +29,10 @@ ds_dict = {'init' : 'Initial',
            'tree' : 'Tree',
            'clus' : 'Clusters',
            'mnist': 'MNIST'}
+
+is_dict = {'normal' : 'Normal',
+           'orth'   : 'Orthogonal',
+           'glorot' : 'Glorot'}
 
 
 
@@ -253,6 +259,8 @@ def weights_kdes(datasets, init_scheme, **flow):
                                      columns = ['edge','src','trg', 'param'])
     
     weights_init = np.sort(EdgesDF['param'].values)
+    _stats = {}
+    _stats.update({'init' : [np.mean(np.abs(weights_init)), weights_init.std(), 0.0, 0.0]})
     
     for dataset in datasets[1:]:
         
@@ -275,7 +283,25 @@ def weights_kdes(datasets, init_scheme, **flow):
                     dpi=300, bbox_inches = 'tight')
         plt.show()
         plt.close('all')
+        
+        # t-Test
+        weights_mean   = np.mean(np.abs(weights))
+        weights_stddev = weights.std() 
+        t_stat,p_value = ttest_ind(weights_init, weights, equal_var = False)
+        _stats.update({dataset : [weights_mean, weights_stddev, t_stat, p_value]})
+        print('{}\n\t{}'.format(init_scheme,dataset))
+        print('t-statistics = {}, p-value = {}'.format(t_stat,p_value))
     #end
+    
+    with open(flow['path_output'] + r'\t-test_complete.txt','w') as handle:
+        
+        for key in _stats.keys():
+            
+            handle.write('{} & {} & {:.6f} & {:.6f} & {:.6f} {} \n'.format(is_dict[init_scheme], ds_dict[key], _stats[key][0],
+                                                                     _stats[key][1],_stats[key][3], r'\\'))
+        #end
+    #end
+    handle.close()
 #end
 
 
@@ -292,7 +318,9 @@ def efficacy_plots(path_results, datasets, initializations, **flow):
         ~ nothing
     """
     
-    flow['save_model'] = False
+    flow['save_model']    = False
+    flow['plot']['train'] = False
+    
     for dataset in datasets[1:]:
         histories = []
         plt.figure(figsize=(7.5,4))
@@ -301,8 +329,8 @@ def efficacy_plots(path_results, datasets, initializations, **flow):
             histories.append(hist)
         #end
         for hist in histories:
-            plt.plot(np.arange(0,10),hist[:10],lw = 2, alpha = 0.75)
-            plt.xticks(np.arange(0,10))
+            plt.plot(np.arange(0,20),hist[:20],lw = 2, alpha = 0.75)
+            plt.xticks(np.arange(0,20))
             plt.xlabel('Epoch')
             plt.ylabel('Accuracy')
             plt.title('Training efficacy')

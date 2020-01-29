@@ -9,9 +9,21 @@ from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 import pandas as pd
 import numpy as np
-from scipy.stats import norm
+from scipy.stats import norm, ttest_ind
 
 from keras.models import load_model
+
+
+ds_dict = {'init' : 'Initial',
+           'tree' : 'Tree',
+           'clus' : 'Clusters',
+           'mnist': 'MNIST'}
+
+is_dict = {'normal' : 'Normal',
+           'orth'   : 'Orthogonal',
+           'glorot' : 'Glorot'}
+
+
 
 
 def bins_for_scheme(datasets, init_scheme, **flow):
@@ -61,12 +73,14 @@ def bins_for_scheme(datasets, init_scheme, **flow):
     
     (mu,sigma) = norm.fit(weights_array)
     
-    fig,ax = plt.subplots(figsize = (10,5))
     N,bins = np.histogram(weights_array, density = True)
-    ax.hist(weights_array,bins = 100, density = True, alpha = 0.2)
-    
     fitted_curve = norm.pdf(weights_array, mu, sigma)
-    ax.plot(weights_array, fitted_curve, 'k', lw = 2, alpha = 0.3)
+    
+    if flow['plot']['preprocess']:
+        fig,ax = plt.subplots(figsize = (10,5))
+        ax.hist(weights_array,bins = 100, density = True, alpha = 0.2)
+        ax.plot(weights_array, fitted_curve, 'k', lw = 2, alpha = 0.3)
+    #end
     
     third_positive_fraction = 1/5.
     third_negative_fraction = 1/5.
@@ -89,38 +103,40 @@ def bins_for_scheme(datasets, init_scheme, **flow):
     
     bins_edges = [min_, third_negative, bins_prev[0], bins_prev[1], third_positive, max_]
     
-    N_,bins_hist = np.histogram(weights_array,bins = bins_edges, density = True)
-    ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
-    N__,bins_hist__,patches = ax.hist(weights_array, bins_hist, density = True, alpha = 0.5)
-    patches[0].set_facecolor('r')
-    patches[1].set_facecolor('y')
-    patches[2].set_facecolor('lightgray')
-    patches[3].set_facecolor('y')
-    patches[4].set_facecolor('g') 
-    
-    legend_elements = [Line2D([0],[0], color = 'k', lw = 2, alpha = 0.3, label = 'Gaussian fit'),
-                       Patch(facecolor = 'b', edgecolor = 'b', alpha = 0.2, label = 'Weights'),
-                       Patch(facecolor = 'r', edgecolor = 'r', alpha = 0.5,
-                             label = 'Negative'),
-                       Patch(facecolor = 'y', edgecolor = 'y', alpha = 0.5,
-                             label = 'Mild (+/-)'),
-                       Patch(facecolor = 'g', edgecolor = 'g', alpha = 0.5,
-                             label = 'Positive'),
-                       Patch(facecolor = 'lightgray', edgecolor = 'lightgray', alpha = 0.5,
-                             label = 'Excluded')]
-                       
-    ax.legend(handles = legend_elements, loc = 'best',
-              prop = {'size' : 10}, fancybox = True)
-    
-    plt.xticks(bins_edges, rotation = 45)
-    ax.set_xlabel('Weights population')
-    ax.set_ylabel('Normalised frequency')
-    title = 'Gaussian fit and categories assignment, {} intialisation'.format(is_dict[init_scheme])
-    plt.title(title)
-    plt.savefig(flow['path_output'] + r'\_Figures\{}_{}_gaussian_fit_weights.png'.format(init_scheme,dataset),
-                dpi=300, bbox_inches = 'tight')
-    plt.show()
-    plt.close('all')
+    if flow['plot']['preprocess']:
+        N_,bins_hist = np.histogram(weights_array,bins = bins_edges, density = True)
+        ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+        N__,bins_hist__,patches = ax.hist(weights_array, bins_hist, density = True, alpha = 0.5)
+        patches[0].set_facecolor('r')
+        patches[1].set_facecolor('y')
+        patches[2].set_facecolor('lightgray')
+        patches[3].set_facecolor('y')
+        patches[4].set_facecolor('g') 
+        
+        legend_elements = [Line2D([0],[0], color = 'k', lw = 2, alpha = 0.3, label = 'Gaussian fit'),
+                           Patch(facecolor = 'b', edgecolor = 'b', alpha = 0.2, label = 'Weights'),
+                           Patch(facecolor = 'r', edgecolor = 'r', alpha = 0.5,
+                                 label = 'Negative'),
+                           Patch(facecolor = 'y', edgecolor = 'y', alpha = 0.5,
+                                 label = 'Mild (+/-)'),
+                           Patch(facecolor = 'g', edgecolor = 'g', alpha = 0.5,
+                                 label = 'Positive'),
+                           Patch(facecolor = 'lightgray', edgecolor = 'lightgray', alpha = 0.5,
+                                 label = 'Excluded')]
+                           
+        ax.legend(handles = legend_elements, loc = 'best',
+                  prop = {'size' : 10}, fancybox = True)
+        
+        plt.xticks(bins_edges, rotation = 45)
+        ax.set_xlabel('Weights population')
+        ax.set_ylabel('Normalised frequency')
+        title = 'Gaussian fit and categories assignment, {} intialisation'.format(is_dict[init_scheme])
+        plt.title(title)
+        plt.savefig(flow['path_output'] + r'\_Figures\gaussian_fit_weights.png',
+                    dpi=300, bbox_inches = 'tight')
+        plt.show()
+        plt.close('all')
+    #end
     
     return bins_edges
 #end
@@ -156,7 +172,9 @@ def spectrum_discretize(bins_edges, dataset, init_scheme, **flow):
     edges_df = pd.DataFrame.from_dict(edges, orient = 'index',
                                    columns = ['edge', 'src', 'trg', 'param'])
     weights = np.asarray(edges_df['param'])
-    spectrum_split_plot(weights, path_save_figures, dataset, bins_edges)
+    if flow['plot']['preprocess']:
+        spectrum_split_plot(weights, path_save_figures, dataset, bins_edges)
+    #end
     
     edges_df = parameters_categories(edges_df, bins_edges)
     
@@ -183,21 +201,46 @@ def spectrum_discretize(bins_edges, dataset, init_scheme, **flow):
     edges_df.loc[edges_df['cats'] == 3, 'cats'] = 4
     edges_df.loc[edges_df['cats'] == 5, 'cats'] = 3
     
-    edges_df = edges_df[['src','trg','cats']]
     edges_df = edges_df[edges_df['cats'] != 4]
+    df_copy = edges_df
+    edges_df = edges_df[['src','trg','cats']]
+    
+    # _edges = {'df_{}'.format(dataset) : edges_df, 'values_{}'.format(dataset) : weights_values}
     
     streams.check_create_directory(flow['path_output'] + r'\{}'.format(dataset))
     
     if flow['write_graph']:
         print('Writing Graph File\n')
         
-        filename = flow['path_output'] + r'\{}\{}_{}_Graph.txt'.format(dataset, dataset, flow['weighted_graph'])
+        filename = flow['path_output'] + r'\{}\_{}_{}_Graph.txt'.format(dataset, dataset, flow['weighted_graph'])
         np.savetxt(filename, edges_df.values, fmt='%d')
     #end
 
-    return edges_df
+    # return edges_df
+    return df_copy
 #end
-
+    
+def t_test(edges_dfs, datasets, init_scheme, **flow):
+    """
+    DOC
+    """
+    weights_init = edges_dfs[0]['param'].values
+    
+    handle = open(flow['path_output'] + r'\t-tests_partial.txt','w')
+    handle.write('{} & Initial & {:.6f} & {:.6f} & -- {} \n'.format(is_dict[init_scheme], np.mean(np.abs(weights_init)),
+                                                               weights_init.std(), r'\\'))
+    for dataset,df in zip(datasets[1:],edges_dfs[1:]):
+        print('{} t-test'.format(dataset))
+        weights = df['param'].values
+        t_stat, p_value = ttest_ind(weights_init, weights, equal_var = False)
+        print('t = {:.6f}, p = {:.6f}'.format(t_stat,p_value))
+        handle.write('{} & {} & {:.6f} & {:.6f} & {:.6f} {}\n'.format(is_dict[init_scheme], ds_dict[dataset],
+                                                                 np.mean(np.abs(weights)), weights.std(),
+                                                                 p_value, r'\\'))
+    #end
+    handle.close()
+    
+#end
 
 
 def spectrum_split_plot(weights, path_save_figures, dataset, bins_edges):

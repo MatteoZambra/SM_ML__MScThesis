@@ -1,0 +1,3 @@
+Orthogonal & Initial & 0.156291 & 0.198793 & 0.000000 \\ 
+Orthogonal & Tree & 0.179944 & 0.236366 & 0.559249 \\ 
+Orthogonal & Clusters & 0.164553 & 0.212597 & 0.692154 \\ 

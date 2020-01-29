@@ -1,0 +1,2 @@
+Orthogonal & Initial & 0.220853 & 0.230935 & -- \\ 
+Orthogonal & MNIST & 0.251951 & 0.279333 & 0.003974 \\

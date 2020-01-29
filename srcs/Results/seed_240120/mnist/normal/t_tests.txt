@@ -1,0 +1,2 @@
+t-test statistics, normal
+mnist : t-value = -3.000923, p-value = 0.002778
