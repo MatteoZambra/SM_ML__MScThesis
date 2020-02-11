@@ -51,4 +51,4 @@ The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been use
 ## Manuscript
 [arXiv preprint](https://arxiv.org/abs/1912.12244) available.
 
-Under review in [Entropy](https://www.mdpi.com/journal/entropy)
+Published in [Entropy](https://www.mdpi.com/1099-4300/22/2/204)
