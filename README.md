@@ -1,7 +1,7 @@
 # Emergence of Network Motifs in Deep Neural Networks
 
 ## Purpose
-This repo contains the code intended to support the developing process of my Master Degree Thesis. The same results are used in the article [_Emergence of network motifs in deep neural networks_](https://www.mdpi.com/1099-4300/22/2/204).
+This repo contains the code intended to support the developing process of my Master Degree Thesis. The same results are used in the article Zambra, Maritan, Testolin, "Emergence of network motifs in deep neural networks", _Entropy_, **2020**, 22, 204, DOI: [https://doi.org/10.3390/e22020204](https://doi.org/10.3390/e22020204).
 
 ## Summary
 
