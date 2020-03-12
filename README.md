@@ -1,7 +1,7 @@
 # Emergence of Network Motifs in Deep Neural Networks
 
 ## Purpose
-This repo contains the code intended to support the developing process of my Master Degree Thesis. The same results are used in the article _Emergence of network motifs in deep neural networks_, linked at the end of this Readme.
+This repo contains the code intended to support the developing process of my Master Degree Thesis. The same results are used in the article [_Emergence of network motifs in deep neural networks_](https://www.mdpi.com/1099-4300/22/2/204).
 
 ## Summary
 
@@ -49,6 +49,4 @@ However, another improvement front related to this necessity would be the **scal
 The [FANMOD](http://theinf1.informatik.uni-jena.de/motifs/) program has been used, in that it has the capability of inspecting colored networks, as it is the case. See the linked page for relevant papers, executable, sources and license.
 
 ## Manuscript
-[arXiv preprint](https://arxiv.org/abs/1912.12244) available.
-
 Published in [Entropy](https://www.mdpi.com/1099-4300/22/2/204)
